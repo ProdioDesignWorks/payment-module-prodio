@@ -85,76 +85,23 @@ Require the payment-module-prodio module and initialize the payment npm module c
 
  	This will register subscriber as merchant into the given payment gateway.
 
-```json
-{
-    "action": "CREATE_MERCHANT", //(required)
-    "meta": {
-    	"userId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", //(required)
-        "basic": {
-            "firstName": "Shashikant",
-            "lastName": "Sharma",
-            "email": "shashikant@prodio.in",
-            "password": "shashikant23",
-            "mobileNumber": "8097487977",
-            "dateOfBirth": "MM-DD-YYYY",
-            "ssn": ""
-        },
-        "business": {
-            "businessName": "BeingExpert Inc.",
-            "dbaName": "BeingExpert Inc.",
-            "taxId": "",
-            "contactEmail": "shashikant@prodio.in",
-            "contactNumber": "8097487977",
-            "addressSameAsUser": "true",
-            "address": {
-                "country": "",
-                "state": "",
-                "city": "",
-                "streetAddress": "",
-                "zipCode": ""
-            }
-        },
-        "billing": {
-            "cardHolderName": "Shashikant Sharma",
-            "creditCardNo": "4356234589794567",
-            "expiryDate": "12/2020",
-            "cvv": "345",
-            "saveCard": "false",
-            "addressSameAsBusiness": "false",
-            "address": {
-                "country": "",
-                "state": "",
-                "city": "",
-                "streetAddress": "",
-                "zipCode": ""
-            }
-        },
-        "payees": [{
-                "firstName": "Pawan",
-                "lastName": "Wagh",
-                "email": "pawan@prodio.in",
-                "mobileNumber": "12312443222",
-                "address": "test address",
-                "paymentMethod": "CREDIT_CARD"
-            },
-            {
-                "firstName": "Anurag",
-                "lastName": "Tiwari",
-                "email": "anurag@prodio.in",
-                "mobileNumber": "12312443222",
-                "address": "test address",
-                "paymentMethod": "CREDIT_CARD"
-            },
-            {
-                "firstName": "Vatsal",
-                "lastName": "Shah",
-                "email": "vatsal@prodio.in",
-                "mobileNumber": "123893222",
-                "address": "test address",
-                "paymentMethod": "CREDIT_CARD"
-            }
-        ]
-    }
-}
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `CREATE_MERCHANT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+
+
+#### Example
+
+```JSX
+    const  payload = {
+        "action": "CREATE_MERCHANT",
+        "meta": SAMPLE_META_INFO
+    };
+    //create merchant in payment module
+    let createMerchantResponse = paymentObj.execute(payload);
 ```
 
