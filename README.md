@@ -82,6 +82,79 @@ Require the payment-module-prodio module and initialize the payment npm module c
 ### Method
 
 `1. Create Merchant:`
- This will register subscriber as merchant into the given payment gateway.
 
+ 	This will register subscriber as merchant into the given payment gateway.
+
+```json
+{
+    "action": "CREATE_MERCHANT", //(required)
+    "meta": {
+    	"userId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", //(required)
+        "basic": {
+            "firstName": "Shashikant",
+            "lastName": "Sharma",
+            "email": "shashikant@prodio.in",
+            "password": "shashikant23",
+            "mobileNumber": "8097487977",
+            "dateOfBirth": "MM-DD-YYYY",
+            "ssn": ""
+        },
+        "business": {
+            "businessName": "BeingExpert Inc.",
+            "dbaName": "BeingExpert Inc.",
+            "taxId": "",
+            "contactEmail": "shashikant@prodio.in",
+            "contactNumber": "8097487977",
+            "addressSameAsUser": "true",
+            "address": {
+                "country": "",
+                "state": "",
+                "city": "",
+                "streetAddress": "",
+                "zipCode": ""
+            }
+        },
+        "billing": {
+            "cardHolderName": "Shashikant Sharma",
+            "creditCardNo": "4356234589794567",
+            "expiryDate": "12/2020",
+            "cvv": "345",
+            "saveCard": "false",
+            "addressSameAsBusiness": "false",
+            "address": {
+                "country": "",
+                "state": "",
+                "city": "",
+                "streetAddress": "",
+                "zipCode": ""
+            }
+        },
+        "payees": [{
+                "firstName": "Pawan",
+                "lastName": "Wagh",
+                "email": "pawan@prodio.in",
+                "mobileNumber": "12312443222",
+                "address": "test address",
+                "paymentMethod": "CREDIT_CARD"
+            },
+            {
+                "firstName": "Anurag",
+                "lastName": "Tiwari",
+                "email": "anurag@prodio.in",
+                "mobileNumber": "12312443222",
+                "address": "test address",
+                "paymentMethod": "CREDIT_CARD"
+            },
+            {
+                "firstName": "Vatsal",
+                "lastName": "Shah",
+                "email": "vatsal@prodio.in",
+                "mobileNumber": "123893222",
+                "address": "test address",
+                "paymentMethod": "CREDIT_CARD"
+            }
+        ]
+    }
+}
+```
 
