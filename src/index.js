@@ -10,13 +10,13 @@ function paymentServices(payload) {
     if(payload.action){
       switch(payload.action){
         case "CREATE_MERCHANT":
-          funCreateMerchant(payload,BASE_URL);
+          return funCreateMerchant(payload,BASE_URL);
         break;
         case "GET_MERCHANT_ACTIVATION_STATUS":
-          funMerchantActionvationStatus(payload,BASE_URL);
+          return funMerchantActionvationStatus(payload,BASE_URL);
         break;
         case "GET_MERCHANT_PROFILE":
-          funMerchantProfile(payload,BASE_URL);
+          return funMerchantProfile(payload,BASE_URL);
         break;
         default:
           let errorMessage = `Please add BaseUrl.`;
@@ -32,46 +32,44 @@ function paymentServices(payload) {
 
 
 //creating user in  notification consumer model.
-const funCreateMerchant = function (payload, baseUrl) {
-  let url = `${baseUrl}ezpayMerchants/createMerchant`;
-  axios.post(url, payload).then(response => {
-    if (response.status === 200) {
-      console.log("111111");
-    }
-    else {
-      console.log("222222");
+const funCreateMerchant = function (payload, baseUrl,callback) {
+  let userId = payload["meta"]["userId"];
+  if (isNull(userId)) {
+    return callback(new HttpErrors.BadRequest('User Id is mandatory.', { expose: false }));
+  }
 
-    }
+  let url = `${baseUrl}ezpayMerchants/createMerchant?userId=${userId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
   }).catch((error) => {
     console.log("333333", error);
+    return callback(new HttpErrors.InternalServerError('Please try again.', { expose: false }));
   });
 }
 
 const funMerchantActionvationStatus = function (payload, baseUrl) {
-  let url = `${baseUrl}ezpayMerchants/getMerchantActivationStatus`;
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  let url = `${baseUrl}ezpayMerchants/getMerchantActivationStatus?merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
-    if (response.status === 200) {
-      console.log("111111");
-    }
-    else {
-      console.log("222222");
-    }
+    return callback(response);
   }).catch((error) => {
-    console.log("333333", error);
+    return callback(new HttpErrors.InternalServerError('Please try again.', { expose: false }));
   });
 }
 
 const funMerchantProfile = function (payload, baseUrl) {
-  let url = `${baseUrl}ezpayMerchants/getMerchantProfile`;
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  let url = `${baseUrl}ezpayMerchants/getMerchantProfile?merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
-    if (response.status === 200) {
-      console.log("111111");
-    }
-    else {
-      console.log("222222");
-    }
+    return callback(response);
   }).catch((error) => {
-    console.log("333333", error);
+    return callback(new HttpErrors.InternalServerError('Please try again.', { expose: false }));
   });
 }
 
