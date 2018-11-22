@@ -176,7 +176,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/create_payer.json) | Json having merchant details. | YES |
 
 
-`7. Edit Payer Info:`
+`8. Edit Payer Info:`
 
  	This function will be used to edit payer information.
 
@@ -188,8 +188,20 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/edit_payer_info.json) | Json having merchant details. | YES |
 
 
+`9. Remove Payer:`
 
-`8. Upload Payers:`
+ 	This function will be used to remove payer from merchant account.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `REMOVE_PAYER` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/remove_payer.json) | Json having merchant details. | YES |
+
+
+
+`10. Upload Payers:`
 
  	This function will be used to upload excel file with multiple payers to perform batch upload.
 
@@ -201,7 +213,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/upload_payers.json) | Json having merchant details. | YES |
 
 
-`9. Create Transaction:`
+`11. Create Transaction:`
 
  	This function will be used to request or create payment transaction.	
 
@@ -213,7 +225,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/create_transaction.json) | Json having merchant details. | YES |
 
 
-`10. Get Payers Listing:`
+`12. Get Payers Listing:`
 
  	This function will provide the listing of active payers for the merchant.	
 
@@ -225,7 +237,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/get_payers_listing.json) | Json having merchant details. | YES |
 
 
-`11. Save Card for Payer:`
+`13. Save Card for Payer:`
 
  	This function will allow to save credit cards for payers, if opted.	
 
@@ -237,7 +249,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/add_card.json) | Json having merchant details. | YES |
 
 
-`12. Remove Card for Payer:`
+`14. Remove Card for Payer:`
 
  	This function will allow to save credit cards for payers, if opted.	
 
@@ -249,7 +261,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/remove_card.json) | Json having merchant details. | YES |
 
 
-`13. Get Saved Cards Listing For Payer:`
+`15. Get Saved Cards Listing For Payer:`
 
  	This function will allow to save credit cards for payers, if opted.	
 
@@ -259,4 +271,28 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_SAVED_CARDS` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](sample_json/get_saved_cards.json) | Json having merchant details. | YES |
+
+
+`16. Process Payment:`
+
+ 	This function will allow to complete payments.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `PROCESS_PAYMENT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/process_payment.json) | Json having merchant details. | YES |
+
+
+`17. Get Transactions Listing:`
+
+ 	This function will list all the transactions with respect to the merchant and you can also search based on filter criterias.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_TRANSACTIONS_LISTING` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_transactions.json) | Json having merchant details. | YES |
 

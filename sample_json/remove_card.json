@@ -1,6 +1,6 @@
 {
     "meta": {
 		"payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (You can get payerId from listing of payers api) */
-		"cardId":"aa15dc54-98e2-45d0-b5ab-113aebf7a1b1", /* (You can get cardId from listing of saved cards api) */
+		"cardId":"aa15dc54-98e2-45d0-b5ab-113aebf7a1b1" /* (You can get cardId from listing of saved cards api) */
     }
 }
