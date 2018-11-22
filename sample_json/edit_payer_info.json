@@ -1,0 +1,13 @@
+{
+    "meta": {
+        "payerId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(You can get this payerId from the response of payer listing function)*/  
+        "payerInfo": {
+            "firstName": "Shashikant",
+            "lastName": "Sharma",
+            "email": "shashikant@prodio.in",
+            "mobileNumber": "8097487977",
+            "address": "Valid Address",
+            "paymentMethod": "CREDIT_CARD"
+        }
+    }
+}

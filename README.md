@@ -140,7 +140,31 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `GET_MERCHANT_PROFILE` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](sample_json/get_merchant_profile.json) | Json having merchant details. | YES |
 
-`5. Create Payer:`
+`5. Update Merchant Profile:`
+
+ 	This function will be used to update the merchant info.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `UPDATE_MERCHANT_PROFILE` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/update_merchant_info.json) | Json having merchant details. | YES |
+
+
+`6. Deactivate Merchant Account:`
+
+ 	This function will be used to deactivate the merchant account.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `DEACTIVATE_MERCHANT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/update_merchant_info.json) | Json having merchant details. | YES |
+
+
+`7. Create Payer:`
 
  	This function will be used to add payer to the merchant.
 
@@ -151,7 +175,21 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `CREATE_PAYER` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](sample_json/create_payer.json) | Json having merchant details. | YES |
 
-`6. Upload Payers:`
+
+`7. Edit Payer Info:`
+
+ 	This function will be used to edit payer information.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `EDIT_PAYER` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/edit_payer_info.json) | Json having merchant details. | YES |
+
+
+
+`8. Upload Payers:`
 
  	This function will be used to upload excel file with multiple payers to perform batch upload.
 
@@ -162,7 +200,8 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `IMPORT_PAYERS` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](sample_json/upload_payers.json) | Json having merchant details. | YES |
 
-`7. Create Transaction:`
+
+`9. Create Transaction:`
 
  	This function will be used to request or create payment transaction.	
 
@@ -173,7 +212,8 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `CREATE_TRANSACTION` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](sample_json/create_transaction.json) | Json having merchant details. | YES |
 
-`8. Get Payers Listing:`
+
+`10. Get Payers Listing:`
 
  	This function will provide the listing of active payers for the merchant.	
 
@@ -185,7 +225,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/get_payers_listing.json) | Json having merchant details. | YES |
 
 
-`9. Save Card for Payer:`
+`11. Save Card for Payer:`
 
  	This function will allow to save credit cards for payers, if opted.	
 
@@ -197,7 +237,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/add_card.json) | Json having merchant details. | YES |
 
 
-`10. Remove Card for Payer:`
+`12. Remove Card for Payer:`
 
  	This function will allow to save credit cards for payers, if opted.	
 
@@ -209,7 +249,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](sample_json/remove_card.json) | Json having merchant details. | YES |
 
 
-`11. Get Saved Cards Listing For Payer:`
+`13. Get Saved Cards Listing For Payer:`
 
  	This function will allow to save credit cards for payers, if opted.	
 

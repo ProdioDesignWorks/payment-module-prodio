@@ -43,6 +43,12 @@ function paymentServices() {
         case "GET_MERCHANT_PROFILE":
           return funMerchantProfile(payload,callback);
         break;
+        case "UPDATE_MERCHANT_PROFILE":
+          return funUpdateMerchantProfile(payload,callback);
+        break;
+        case "DEACTIVATE_MERCHANT":
+          return funDeactivateAccount(payload,callback);
+        break;
         case "CREATE_PAYER":
           return funCreatePayer(payload,callback);
         break;
@@ -63,6 +69,9 @@ function paymentServices() {
         break;
         case "GET_SAVED_CARDS":
           return funSavedCardsListing(payload,callback);
+        break;
+        case "EDIT_PAYER":
+          return funEditPayer(payload,callback);
         break;
         default:
           let errorMessage = `Please add BaseUrl.`;
@@ -138,6 +147,36 @@ const funMerchantProfile = function (payload,callback) {
   });
 }
 
+
+const funUpdateMerchantProfile = function (payload,callback) {
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  let url = `${BASE_URL}ezpayMerchants/updateMerchantProfile?merchantId=${merchantId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funDeactivateAccount = function (payload,callback) {
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  let url = `${BASE_URL}ezpayMerchants/deactivateMerchant?merchantId=${merchantId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+
 const funCreatePayer = function (payload,callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
@@ -151,6 +190,22 @@ const funCreatePayer = function (payload,callback) {
     return callback(json);
   });
 }
+
+const funEditPayer = function (payload,callback) {
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+  let url = `${BASE_URL}ezpayPayees/editPayee?payerId=${payerId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+
 
 const funImportPayers = function (payload,callback) {
   let merchantId = payload["meta"]["merchantId"];
