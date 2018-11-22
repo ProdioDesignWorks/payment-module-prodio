@@ -49,8 +49,20 @@ function paymentServices() {
         case "IMPORT_PAYERS":
           return funImportPayers(payload,callback);
         break;
+        case "GET_PAYERS_LISTING":
+          return funGetPayersListing(payload,callback);
+        break;
         case "CREATE_TRANSACTION":
           return funCreateTransaction(payload,callback);
+        break;
+        case "SAVE_CARD":
+          return funSaveCard(payload,callback);
+        break;
+        case "REMOVE_CARD":
+          return funRemoveCard(payload,callback);
+        break;
+        case "GET_SAVED_CARDS":
+          return funSavedCardsListing(payload,callback);
         break;
         default:
           let errorMessage = `Please add BaseUrl.`;
@@ -154,6 +166,22 @@ const funImportPayers = function (payload,callback) {
   });
 }
 
+
+const funGetPayersListing = function (payload,callback) {
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  let url = `${BASE_URL}ezpayMerchants/getPayeesListing?merchantId=${merchantId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+
 const funCreateTransaction = function (payload,callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
@@ -172,5 +200,59 @@ const funCreateTransaction = function (payload,callback) {
     return callback(json);
   });
 }
+
+const funSaveCard = function (payload,callback) {
+  
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+  
+  let url = `${BASE_URL}ezpayPayees/addCardForPayee?payerId=${payerId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funRemoveCard = function (payload,callback) {
+  
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let cardId = payload["meta"]["cardId"];
+  if (isNull(cardId)) {
+    return callback(new HttpErrors.BadRequest('card Id is mandatory.', { expose: false }));
+  }
+  
+  let url = `${BASE_URL}ezpayPayees/removeCard?payerId=${payerId}&cardId=${cardId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funSavedCardsListing = function (payload,callback) {
+  
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+  
+  let url = `${BASE_URL}ezpayPayees/getSavedCards?payerId=${payerId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
 
 module.exports = paymentServices;

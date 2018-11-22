@@ -114,7 +114,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_MERCHANT_STATUS` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_merchant_activation_status.json) | Json having merchant details. | YES |
 
 
 `3. Get Merchant Id from (Your) User Id:`
@@ -126,7 +126,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_MERCHANT_ID` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_merchant_id.json) | Json having merchant details. | YES |
 
 
 `4. Get Merchant Profile:`
@@ -138,7 +138,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_MERCHANT_PROFILE` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_merchant_profile.json) | Json having merchant details. | YES |
 
 `5. Create Payer:`
 
@@ -149,7 +149,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `CREATE_PAYER` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_payer.json) | Json having merchant details. | YES |
 
 `6. Upload Payers:`
 
@@ -160,7 +160,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `IMPORT_PAYERS` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/upload_payers.json) | Json having merchant details. | YES |
 
 `7. Create Transaction:`
 
@@ -171,5 +171,52 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `CREATE_TRANSACTION` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_transaction.json) | Json having merchant details. | YES |
+
+`8. Get Payers Listing:`
+
+ 	This function will provide the listing of active payers for the merchant.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_PAYERS_LISTING` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_payers_listing.json) | Json having merchant details. | YES |
+
+
+`9. Save Card for Payer:`
+
+ 	This function will allow to save credit cards for payers, if opted.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `SAVE_CARD` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/add_card.json) | Json having merchant details. | YES |
+
+
+`10. Remove Card for Payer:`
+
+ 	This function will allow to save credit cards for payers, if opted.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `REMOVE_CARD` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/remove_card.json) | Json having merchant details. | YES |
+
+
+`11. Get Saved Cards Listing For Payer:`
+
+ 	This function will allow to save credit cards for payers, if opted.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_SAVED_CARDS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_saved_cards.json) | Json having merchant details. | YES |
 
