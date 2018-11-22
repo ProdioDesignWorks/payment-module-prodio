@@ -12,13 +12,17 @@
             "ssn": ""
         },
         "business": {
+            "accountName":"Shashikant Sharma",
+            "routingNumber":"123456789",
+            "accountNumber":"134121314131",
+            "fedTaxId":"123456789",
             "businessName": "BeingExpert Inc.",
             "dbaName": "BeingExpert Inc.",
             "taxId": "",
             "contactEmail": "shashikant@prodio.in",
             "contactNumber": "8097487977",
             "addressSameAsUser": "true",
-            "address": {
+            "address": {                     /* (required) */
                 "country": "",
                 "state": "",
                 "city": "",

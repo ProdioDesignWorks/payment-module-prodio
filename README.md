@@ -105,3 +105,71 @@ Require the payment-module-prodio module and initialize the payment npm module c
     let createMerchantResponse = paymentObj.execute(payload);
 ```
 
+`2. Get Merchant Activation Status:`
+
+ 	This function will be used to get the merchant activation status.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_MERCHANT_STATUS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+
+
+`3. Get Merchant Id from (Your) User Id:`
+
+ 	This function will be used to get the merchant id from user id.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_MERCHANT_ID` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+
+
+`4. Get Merchant Profile:`
+
+ 	This function will be used to get the merchant activation status.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_MERCHANT_PROFILE` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+
+`5. Create Payer:`
+
+ 	This function will be used to add payer to the merchant.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `CREATE_PAYER` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+
+`6. Upload Payers:`
+
+ 	This function will be used to upload excel file with multiple payers to perform batch upload.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `IMPORT_PAYERS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+
+`7. Create Transaction:`
+
+ 	This function will be used to request or create payment transaction.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `CREATE_TRANSACTION` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+
