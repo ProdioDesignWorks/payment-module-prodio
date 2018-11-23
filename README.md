@@ -59,8 +59,9 @@ This project is started with an aim to reduce implementing and re-architecting c
  * Navigate to your repo cd payment-services-prodio
  * Install dependencies npm install
  * Start service node . or npm start or node server/server.js
- * Open http://localhost:3000/explorer/ in your browser
+ * Open http://localhost:3010/explorer/ in your browser
  * If you've pm2 installed then use this pm2 start server/server.js --name="PAYMENT_SERVICE"
+ * When you install `payment-module-prodio`, it will ask question for the BASE_URL of this `PAYMENT_SERVICE` - eventually.
 
 # Note:
 `payment-services-prodio` uses loopback as the core framework for developing API's, so all customisations, configurations, middlewares, events, and db connectors can be used which you would have used in loopback.
@@ -97,7 +98,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 #### Example
 
 ```JSX
-    const  payload = {
+    const payload = {
         "action": "CREATE_MERCHANT",
         "meta": SAMPLE_META_INFO
     };
@@ -114,13 +115,13 @@ Require the payment-module-prodio module and initialize the payment npm module c
     		}
 
             if (!isNull(serverResponse.error)) {
-                //Error
-                //cb(null,response.response.data.error.message);
-                cb(new HttpErrors.InternalServerError(response.data.error.message, {
+                //Error Response
+                return cb(new HttpErrors.InternalServerError(response.data.error.message, {
                     expose: false
                 }));
             } else {
-                cb(null, response.data);
+                // HTTP : 200 , Success Response , Merchant Successfully Created!!
+                return cb(null, response.data);
             }
         } else {
         	if (!isNull(response["response"])) {
@@ -135,14 +136,14 @@ Require the payment-module-prodio module and initialize the payment npm module c
         		}
 
         		let _msg = isNull(serverResponseError["message"]) ? 'Internal Server Error' : serverResponseError["message"];
-                cb(new HttpErrors.InternalServerError(_msg, {
-                    expose: false
-                }));
+
+                //Error Response
+                return cb(new HttpErrors.InternalServerError(_msg, { expose: false }));
         	}else{
                 let _msg = isNull(response["data"]["message"]) ? 'Internal Server Error' : response["data"]["message"];
-                cb(new HttpErrors.InternalServerError(_msg, {
-                    expose: false
-                }));
+
+                //Error Response
+                return cb(new HttpErrors.InternalServerError(_msg, { expose: false }));
             }
         }
     });
