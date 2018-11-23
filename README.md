@@ -102,7 +102,50 @@ Require the payment-module-prodio module and initialize the payment npm module c
         "meta": SAMPLE_META_INFO
     };
     //create merchant in payment module
-    let createMerchantResponse = paymentObj.execute(payload);
+    paymentObj.execute(payload, function(response) {
+        if(typeof response == "string" || typeof response === "string"){
+        	response = JSON.parse(response);
+        }
+        
+        if (!isNull(response.data)) {
+        	let serverResponse = response["data"];
+    		if(typeof serverResponse == "string" || typeof serverResponse === "string"){
+    			serverResponse = JSON.parse(response["data"]);
+    		}
+
+            if (!isNull(serverResponse.error)) {
+                //Error
+                //cb(null,response.response.data.error.message);
+                cb(new HttpErrors.InternalServerError(response.data.error.message, {
+                    expose: false
+                }));
+            } else {
+                cb(null, response.data);
+            }
+        } else {
+        	if (!isNull(response["response"])) {
+        		let serverResponse = response["response"]["data"];
+        		if(typeof serverResponse == "string" || typeof serverResponse === "string"){
+        			serverResponse = JSON.parse(response["response"]["data"]);
+        		}
+
+        		let serverResponseError = serverResponse["error"];
+        		if(typeof serverResponseError == "string" || typeof serverResponseError === "string"){
+        			serverResponseError = JSON.parse(serverResponseError["error"]);
+        		}
+
+        		let _msg = isNull(serverResponseError["message"]) ? 'Internal Server Error' : serverResponseError["message"];
+                cb(new HttpErrors.InternalServerError(_msg, {
+                    expose: false
+                }));
+        	}else{
+                let _msg = isNull(response["data"]["message"]) ? 'Internal Server Error' : response["data"]["message"];
+                cb(new HttpErrors.InternalServerError(_msg, {
+                    expose: false
+                }));
+            }
+        }
+    });
 ```
 
 `2. Get Merchant Activation Status:`
