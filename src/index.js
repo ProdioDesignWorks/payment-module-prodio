@@ -1,4 +1,9 @@
-//Payment Module
+/** 
+ * By Shashikant Sharma 
+ * 
+ * This code will take the user action and based on the user action and payload it will call the respective payment service.
+ *  
+ */ 
 // eslint-disable-next-line import/prefer-default-export
 const axios = require('axios');
 const CircularJSON = require('circular-json');
@@ -58,6 +63,9 @@ function paymentServices() {
         case "GET_PAYERS_LISTING":
           return funGetPayersListing(payload,callback);
         break;
+        case "GET_PAYER_PROFILE":
+          return funGetPayerProfile(payload,callback);
+        break;
         case "CREATE_TRANSACTION":
           return funCreateTransaction(payload,callback);
         break;
@@ -82,6 +90,12 @@ function paymentServices() {
         case "GET_TRANSACTIONS_LISTING":
           return funGetTransactionsListing(payload,callback);
         break;
+        case "GET_TRANSACTION_DETAILS":
+          return funGetTransactionDetails(payload,callback);
+        break;
+        case "GET_TRANSACTION_STATS":
+          return funGetTransactionStats(payload,callback);
+        break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -95,7 +109,11 @@ function paymentServices() {
 }
 
 
-//creating user in  notification consumer model.
+/**
+* This function will call create merchant service.
+* @param payload - the required payload JSON to perform the operations.
+* @param callback - to send the response back to the requester.
+*/
 const funCreateMerchant = function (payload,callback) {
   let userId = payload["meta"]["userId"];
   if (isNull(userId)) {
@@ -112,6 +130,12 @@ const funCreateMerchant = function (payload,callback) {
     return callback(json);
   });
 }
+
+/**
+* This function will get merchant account activation status.
+* @param payload - the required payload JSON to perform the operations.
+* @param callback - to send the response back to the requester.
+*/
 
 const funMerchantActionvationStatus = function (payload,callback) {
   let merchantId = payload["meta"]["merchantId"];
@@ -259,6 +283,21 @@ const funGetPayersListing = function (payload,callback) {
 }
 
 
+const funGetPayerProfile = function (payload,callback) {
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+  let url = `${BASE_URL}ezpayPayees/getPayerProfile?payerId=${payerId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+
 const funCreateTransaction = function (payload,callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
@@ -343,7 +382,7 @@ const funGetTransactionsListing = function (payload,callback) {
   }
 
   
-  let url = `${BASE_URL}ezpayPaymentTransactions/getSavedCards?merchantId=${merchantId}&pageNo=${pageNo}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionsListing?merchantId=${merchantId}&pageNo=${pageNo}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -377,5 +416,40 @@ const funProcessPayment = function (payload,callback) {
     return callback(json);
   });
 }
+
+
+const funGetTransactionDetails = function (payload,callback) {
+  
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
+  }
+  
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionDetails?transactionId=${transactionId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funGetTransactionStats = function (payload,callback) {
+  
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionStats?merchantId=${merchantId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+
 
 module.exports = paymentServices;
