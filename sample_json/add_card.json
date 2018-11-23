@@ -1,0 +1,10 @@
+{
+    "meta": {
+		"payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (You can get payerId from listing of payers api) */
+		"cardNumber":"4111111111111111",
+		"cardHolderName":"Shashikant Sharma",
+		"expDate":"MM/YYYY",
+		"cvv":"123",
+		"cardType":"VISA"
+    }
+}
