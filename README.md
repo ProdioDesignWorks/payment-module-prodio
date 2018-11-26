@@ -380,3 +380,15 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `GET_TRANSACTION_STATS` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](sample_json/get_transactions_stats.json) | Json having merchant details. | YES |
 
+
+`21. Get Non Payers Listing:`
+
+ 	This function will provide listing of all non payers.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_NON_PAYERS_LISTING` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_nonpayers_listing.json) | Json having merchant details. | YES |
+

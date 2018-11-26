@@ -93,6 +93,9 @@ function paymentServices() {
         case "GET_TRANSACTION_DETAILS":
           return funGetTransactionDetails(payload,callback);
         break;
+        case "GET_NON_PAYERS_LISTING":
+          return funGetNonPayersListing(payload,callback);
+        break;
         case "GET_TRANSACTION_STATS":
           return funGetTransactionStats(payload,callback);
         break;
@@ -442,6 +445,22 @@ const funGetTransactionStats = function (payload,callback) {
   }
   
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionStats?merchantId=${merchantId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funGetNonPayersListing = function (payload,callback) {
+  
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  
+  let url = `${BASE_URL}ezpayPaymentTransactions/getNonPayersListing?merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
