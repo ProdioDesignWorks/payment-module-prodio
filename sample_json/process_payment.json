@@ -8,7 +8,8 @@
 			"cardHolderName":"Shashikant Sharma",
 			"expDate":"MM/YYYY",
 			"cvv":"123",
-			"cardType":"VISA"
+			"cardType":"VISA",
+			"saveCard": false
 		}
     }
 }

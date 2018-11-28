@@ -392,3 +392,37 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `GET_NON_PAYERS_LISTING` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](sample_json/get_nonpayers_listing.json) | Json having merchant details. | YES |
 
+
+`22. Get Payers Transactions:`
+
+ 	This function will provide listing of transactions of a payer.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_PAYERS_TRANSACTION` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_payers_transactions.json) | Json having merchant details. | YES |
+
+
+`23. Get All Merchants:`
+
+ 	This function will provide listing of all active merchants.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_ALL_MERCHANTS` | key which defines the type of action to be performed | YES |
+
+
+`24. Get Payer Transaction Stats:`
+
+ 	This function will provide transactions stats like AmountPending and TotalCollections for a payer.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_PAYER_TRANSACTION_STATS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_payer_transactions_stats.json) | Json having merchant details. | YES |
