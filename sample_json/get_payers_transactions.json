@@ -1,0 +1,14 @@
+{
+    "meta": {
+        "payerId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(You can get this payerId from the response of getPayersListing function)*/  
+		"pageNo":0,
+		"filterCriteria":{ 
+			"merchantId":"",                                    /*(optional) */
+			"keywod":"",
+			"dateFrom":"MM-DD-YYYY",
+			"dateTo":"MM-DD-YYYY",
+			"payerId":"",
+			"amount":""
+		}
+    }
+}
