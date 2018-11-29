@@ -107,6 +107,12 @@ function paymentServices(BASE_URL) {
         case "GET_ALL_MERCHANTS":
           return funGetAllMerchants(BASE_URL,payload,callback);
         break;
+        case "ATTACH_PAYER_MERCHANT":
+          return funAttachPayerWithMerchant(BASE_URL,payload,callback);
+        break;
+        case "GET_MERCHANTS_OF_PAYER":
+          return funGetMerchantsForPayer(BASE_URL,payload,callback);
+        break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -517,6 +523,44 @@ const funGetPayersTransactions = function (BASE_URL,payload,callback) {
   }
   
   let url = `${BASE_URL}ezpayPaymentTransactions/getPayersTransactions?payerId=${payerId}&pageNo=${pageNo}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funAttachPayerWithMerchant = function (BASE_URL,payload,callback) {
+  
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  
+  
+  let url = `${BASE_URL}ezpayPaymentTransactions/getPayersTransactions?payerId=${payerId}&merchantId=${merchantId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funGetMerchantsForPayer = function (BASE_URL,payload,callback) {
+  
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/getPayersTransactions?payerId=${payerId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {

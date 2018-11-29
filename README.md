@@ -426,3 +426,27 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_PAYER_TRANSACTION_STATS` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](sample_json/get_payer_transactions_stats.json) | Json having merchant details. | YES |
+
+
+`25. Attach Payer with Merchant:`
+
+ 	This function will attach any given payer with any given merchant.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `ATTACH_PAYER_MERCHANT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/attach_payer_merchant.json) | Json having merchant details. | YES |
+
+
+`26. Get Active Merchants for Payer:`
+
+ 	This function will provide listing of all the active merchants attached with a payer.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_MERCHANTS_OF_PAYER` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/get_payer_profile.json) | Json having merchant details. | YES |
