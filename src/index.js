@@ -485,8 +485,13 @@ const funGetPayerTransactionStats = function (BASE_URL,payload,callback) {
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
+
+  let merchantId = "";
+  if(typeof payload["meta"]["merchantId"]!=="undefined" &&  typeof payload["meta"]["merchantId"]!==undefined ){
+    merchantId = payload["meta"]["merchantId"];
+  }
   
-  let url = `${BASE_URL}ezpayPaymentTransactions/getPayerTransactionStats?payerId=${payerId}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/getPayerTransactionStats?payerId=${payerId}&merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -544,7 +549,7 @@ const funAttachPayerWithMerchant = function (BASE_URL,payload,callback) {
   }
   
   
-  let url = `${BASE_URL}ezpayPaymentTransactions/getPayersTransactions?payerId=${payerId}&merchantId=${merchantId}`;
+  let url = `${BASE_URL}ezpayMerchants/attachPayerWithMerchant?payerId=${payerId}&merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -560,7 +565,7 @@ const funGetMerchantsForPayer = function (BASE_URL,payload,callback) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
 
-  let url = `${BASE_URL}ezpayPaymentTransactions/getPayersTransactions?payerId=${payerId}`;
+  let url = `${BASE_URL}ezpayMerchants/getMerchantListingForPayer?payerId=${payerId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
