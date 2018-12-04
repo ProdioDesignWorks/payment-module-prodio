@@ -8,10 +8,12 @@
             "password": "shashikant23",
             "mobileNumber": "8097487977",
             "dateOfBirth": "MM-DD-YYYY",
+            "profilePictureUrl": "",
             "ssn": ""
         },
         "business": {
             "accountName":"Shashikant Sharma",
+            "businessLogoUrl": "",
             "routingNumber":"123456789",
             "accountNumber":"134121314131",
             "fedTaxId":"123456789",
