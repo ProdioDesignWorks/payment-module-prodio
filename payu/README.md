@@ -1,25 +1,9 @@
 
 # Features!
-  
-* Merchant 
-	* Create Merchant
-	* Get Merchant Activation Status
-	* Get Merchant Profile
-	* DeActivate Merchant
-	* Remove Merchant
-
-* Payees (Customers)
-	* Add Payee
-	* Edit Payee
-	* Remove Payee(s)
-	* Import Payees
-
-* Cards
-	* Add Card for Payee
-	* Remove Card from Payee
 
 * Payment Transaction
 	* Process Payment
+	* Get Payment Status
 	* Get Payment Transactions (filter by mechant, payee, date, keyword etc.)
 
 * Recurring Billing
@@ -35,8 +19,6 @@
 	* Process Refund for Transaction
 
 * Reports/Stats
-
-* WebHooks.
  
 
 ### Installation
@@ -55,24 +37,24 @@ Require the payment-module-prodio module and initialize the payment npm module c
 
 ### Method
 
-`1. Create Merchant:`
+`1. Process Payment:`
 
- 	This will register subscriber as merchant into the given payment gateway.
+ 	This will does the payment transaction.
 
 
 ### Payload
 
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
-| `action` | string | `CREATE_MERCHANT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/create_merchant.json) | Json having merchant details. | YES |
+| `action` | string | `PROCESS_PAYMENT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](sample_json/payu/payu_process_payment.json) | Json having merchant details. | YES |
 
 
 #### Example
 
 ```JSX
 	const payload = {
-	    "action": "CREATE_MERCHANT",
+	    "action": "PROCESS_PAYMENT",
 	    "meta": SAMPLE_META_INFO
 	};
 	//create merchant in payment module
