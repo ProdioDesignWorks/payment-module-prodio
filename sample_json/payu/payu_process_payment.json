@@ -1,0 +1,13 @@
+{
+    "meta": {
+		"productinfo": "test name",
+		"txnid": "123",
+		"amount": "200",
+		"email": "shashikant@prodio.in",
+		"phone": "1234141332",
+		"lastname": "sharma",
+		"firstname": "shashi",
+		"surl": "http://localhost:3010/api/ezpayPaymentTransactions/receivePayUWebhooks?redirectUrl=https://alpha.kinektapp.com", //"http://localhost:3000/payu/success"
+		"furl": "http://localhost:3010/api/ezpayPaymentTransactions/receivePayUWebhooks?redirectUrl=https://dev.kinektapp.com", //"http://localhost:3000/payu/fail"
+    }
+}
