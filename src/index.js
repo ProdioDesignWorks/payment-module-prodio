@@ -241,10 +241,12 @@ const funDeactivateAccount = function (BASE_URL,payload,callback) {
 
 
 const funCreatePayer = function (BASE_URL,payload,callback) {
-  let merchantId = payload["meta"]["merchantId"];
-  if (isNull(merchantId)) {
-    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  let merchantId = "";
+
+  if (!isNull(payload["meta"]["merchantId"])) {
+    merchantId = payload["meta"]["merchantId"];
   }
+
   let url = `${BASE_URL}ezpayPayees/addPayee?merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
