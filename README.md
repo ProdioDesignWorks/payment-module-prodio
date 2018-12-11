@@ -12,8 +12,9 @@ This project is started with an aim to reduce implementing and re-architecting c
 
 ### Currently Supported Payment Gateways
 
-* [Integrity Payments](integrity/README.md)
-* [PayU Money Biz](payu/README.md)
+* [Integrity Payments](payment-gateways/integrity/README.md)
+* [PayU Money Biz](payment-gateways/payu/README.md)
+* [TSYS Cayan](payment-gateways/tsys/README.md)
 
 # Prerequisite:
  * Clone this repository on your server git clone https://github.com/ProdioDesignWorks/payment-services-prodio.git
@@ -24,10 +25,12 @@ This project is started with an aim to reduce implementing and re-architecting c
  * If you've pm2 installed then use this pm2 start server/server.js --name="PAYMENT_SERVICE"
  * When you install `payment-module-prodio`, it will ask question for the BASE_URL of this `PAYMENT_SERVICE` - eventually.
  * There is a [config](services/paymentsources.json) file, which defines all the root credentials for the payment gateways.
+ * IMP - You can ONLY Select anyone as `isActive` true. And that payment gateway will be used as default.
  * You will have to manually install the following `npm` modules (as of now) -
  	* `npm install service-adapter-prodio@latest --save`
  	* `npm install integrity-connector-prodio@latest --save`
  	* `npm install payu-connector-prodio@latest --save`
+ 	* `npm install tsys-connector-prodio@latest --save`
 
 # Note:
 `payment-services-prodio` uses loopback as the core framework for developing API's, so all customisations, configurations, middlewares, events, and db connectors can be used which you would have used in loopback.
