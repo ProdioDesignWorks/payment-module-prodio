@@ -86,6 +86,9 @@ function paymentServices(BASE_URL) {
         case "PROCESS_PAYMENT":
           return funProcessPayment(BASE_URL,payload,callback);
         break;
+        case "DIRECT_PAYMENT":
+          return funDirectPayment(BASE_URL,payload,callback);
+        break;
         case "GET_TRANSACTIONS_LISTING":
           return funGetTransactionsListing(BASE_URL,payload,callback);
         break;
@@ -440,6 +443,20 @@ const funProcessPayment = function (BASE_URL,payload,callback) {
   }
   
   let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+
+
+const funDirectPayment = function (BASE_URL,payload,callback) {
+
+  
+  let url = `${BASE_URL}ezpayPaymentTransactions/directPayment`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {

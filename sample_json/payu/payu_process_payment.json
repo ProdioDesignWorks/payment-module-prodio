@@ -1,13 +1,10 @@
 {
     "meta": {
-		"productinfo": "test name",
-		"txnid": "123",
+		"orderTitle": "test name",
+		"transactionId": "123",
+		"payerId":"23qerq-sfasfd-2322c-cvsds-q32dd",
 		"amount": "200",
-		"email": "shashikant@prodio.in",
-		"phone": "1234141332",
-		"lastname": "sharma",
-		"firstname": "shashi",
-		"surl": "http://localhost:3010/api/ezpayPaymentTransactions/receivePayUWebhooks?redirectUrl=https://alpha.kinektapp.com", //"http://localhost:3000/payu/success"
-		"furl": "http://localhost:3010/api/ezpayPaymentTransactions/receivePayUWebhooks?redirectUrl=https://dev.kinektapp.com", //"http://localhost:3000/payu/fail"
+		"successUrl": "https://alpha.kinektapp.com/success", //"http://localhost:3000/payu/success"
+		"failureUrl": "https://alpha.kinektapp.com/failure", //"http://localhost:3000/payu/fail"
     }
 }
