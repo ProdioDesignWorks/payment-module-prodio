@@ -454,8 +454,8 @@ const funProcessPayment = function (BASE_URL,payload,callback) {
 
 
 const funDirectPayment = function (BASE_URL,payload,callback) {
-  payload["meta"]["BASE_URL"] = BASE_URL;
-  
+  payload["BASE_URL"] = BASE_URL;
+  console.log("payload==>"+JSON.stringify(payload));
   let url = `${BASE_URL}ezpayPaymentTransactions/directPayment`;
   axios.post(url, payload).then(response => {
     return callback(response);
