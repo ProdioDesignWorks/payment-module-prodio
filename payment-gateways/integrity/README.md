@@ -65,7 +65,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `CREATE_MERCHANT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](./sample_json/integrity/create_merchant.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/integrity/create_merchant.json) | Json having merchant details. | YES |
 
 
 #### Example
