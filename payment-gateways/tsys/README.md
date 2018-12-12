@@ -31,7 +31,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 ```JSX
 
  const paymentClass = require('payment-module-prodio');
- const paymentObj = new paymentClass();
+ const paymentObj = new paymentClass(BASE_URL);
  ``` 
 
 
@@ -47,7 +47,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `CREATE_MERCHANT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/create_merchant.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/create_merchant.json) | Json having merchant details. | YES |
 
 
 #### Example
@@ -117,7 +117,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_MERCHANT_STATUS` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/get_merchant_activation_status.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/get_merchant_activation_status.json) | Json having merchant details. | YES |
 
 
 `3. Get Merchant Id from (Your) User Id:`
@@ -129,7 +129,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_MERCHANT_ID` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/get_merchant_id.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/get_merchant_id.json) | Json having merchant details. | YES |
 
 
 `4. Get Merchant Profile:`
@@ -141,7 +141,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_MERCHANT_PROFILE` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/get_merchant_profile.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/get_merchant_profile.json) | Json having merchant details. | YES |
 
 `5. Update Merchant Profile:`
 
@@ -152,7 +152,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `UPDATE_MERCHANT_PROFILE` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/update_merchant_info.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/update_merchant_info.json) | Json having merchant details. | YES |
 
 
 `6. Deactivate Merchant Account:`
@@ -164,7 +164,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `DEACTIVATE_MERCHANT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/update_merchant_info.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/update_merchant_info.json) | Json having merchant details. | YES |
 
 
 `7. Create Payer:`
@@ -176,7 +176,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `CREATE_PAYER` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/create_payer.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/create_payer.json) | Json having merchant details. | YES |
 
 
 `8. Edit Payer Info:`
@@ -188,7 +188,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `EDIT_PAYER` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/edit_payer_info.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/edit_payer_info.json) | Json having merchant details. | YES |
 
 
 `9. Remove Payer:`
@@ -200,7 +200,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `REMOVE_PAYER` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/remove_payer.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/remove_payer.json) | Json having merchant details. | YES |
 
 
 
@@ -213,7 +213,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `CREATE_TRANSACTION` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/create_transaction.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/create_transaction.json) | Json having merchant details. | YES |
 
 
 `11. Get Payers Listing:`
@@ -225,7 +225,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_PAYERS_LISTING` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/get_payers_listing.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/get_payers_listing.json) | Json having merchant details. | YES |
 
 
 `12. Get Payer Profile:`
@@ -237,7 +237,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_PAYER_PROFILE` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/integrity/get_payer_profile.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/integrity/get_payer_profile.json) | Json having merchant details. | YES |
 
 
 
@@ -250,7 +250,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `PROCESS_PAYMENT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/payu/payu_process_payment.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/payu/payu_process_payment.json) | Json having merchant details. | YES |
 
 
 
@@ -263,5 +263,5 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `DIRECT_PAYMENT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](sample_json/payu/payu_direct_payment.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](../sample_json/payu/payu_direct_payment.json) | Json having merchant details. | YES |
 
