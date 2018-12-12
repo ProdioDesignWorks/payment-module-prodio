@@ -1,0 +1,10 @@
+{
+    "meta": {
+		"orderTitle": "test name",
+		"transactionId": "123",
+		"payerId":"23qerq-sfasfd-2322c-cvsds-q32dd",
+		"amount": "200",
+		"successUrl": "https://alpha.kinektapp.com/success", //"http://localhost:3000/payu/success"
+		"failureUrl": "https://alpha.kinektapp.com/failure", //"http://localhost:3000/payu/fail"
+    }
+}

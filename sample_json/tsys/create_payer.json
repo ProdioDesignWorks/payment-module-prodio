@@ -1,0 +1,13 @@
+{
+    "meta": {
+        "merchantId":"4c38b4f2-aee5-4482-bcd8-377435bea47b", /*(You can get this merchantId from the response of createMerchant or getMerchantId function)*/  
+        "payerInfo": {
+            "firstName": "Shashikant",
+            "lastName": "Sharma",
+            "email": "shashikant@prodio.in",
+            "mobileNumber": "8097487977",
+            "address": "Valid Address",
+            "paymentMethod": "CREDIT_CARD"
+        }
+    }
+}

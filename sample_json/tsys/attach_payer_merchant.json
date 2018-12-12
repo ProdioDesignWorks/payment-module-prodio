@@ -1,0 +1,6 @@
+{
+    "meta": {
+        "merchantId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(required,You can get this merchantId from create merchant)*/  
+		"payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (required,You can get payerId from listing of payers api) */
+    }
+}
