@@ -186,8 +186,8 @@ const funMerchantActionvationStatus = function (BASE_URL,payload,callback) {
 
 
 const funGetMerchantId = function (BASE_URL,payload,callback) {
-  let merchantId = payload["meta"]["userId"];
-  if (isNull(merchantId)) {
+  let userId = payload["meta"]["userId"];
+  if (isNull(userId)) {
     return callback(new HttpErrors.BadRequest('user Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayMerchants/getMerchantFromUserId?userId=${userId}`;
