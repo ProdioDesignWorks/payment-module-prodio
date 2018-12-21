@@ -116,6 +116,9 @@ function paymentServices(BASE_URL) {
         case "GET_MERCHANTS_OF_PAYER":
           return funGetMerchantsForPayer(BASE_URL,payload,callback);
         break;
+        case "MAKE_REFUND":
+          return funMakeRefund(BASE_URL,payload,callback);
+        break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -186,8 +189,8 @@ const funMerchantActionvationStatus = function (BASE_URL,payload,callback) {
 
 
 const funGetMerchantId = function (BASE_URL,payload,callback) {
-  let merchantId = payload["meta"]["userId"];
-  if (isNull(merchantId)) {
+  let userId = payload["meta"]["userId"];
+  if (isNull(userId)) {
     return callback(new HttpErrors.BadRequest('user Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayMerchants/getMerchantFromUserId?userId=${userId}`;
@@ -593,6 +596,18 @@ const funGetMerchantsForPayer = function (BASE_URL,payload,callback) {
   });
 }
 
+
+
+const funMakeRefund = function (BASE_URL,payload,callback) {
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/makeRefund`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
 
 
 module.exports = paymentServices;

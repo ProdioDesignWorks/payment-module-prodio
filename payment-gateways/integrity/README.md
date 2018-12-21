@@ -423,3 +423,15 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_MERCHANTS_OF_PAYER` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/integrity/get_payer_profile.json) | Json having merchant details. | YES |
+
+
+`27. Make Refund:`
+
+ 	This will does the refund part for the transaction.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `MAKE_REFUND` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/tsys/make_refund.json) | Json having merchant details. | YES |
