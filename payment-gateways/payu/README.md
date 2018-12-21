@@ -265,3 +265,15 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `DIRECT_PAYMENT` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/payu_direct_payment.json) | Json having merchant details. | YES |
 
+
+`15. Make Refund:`
+
+ 	This will does the refund part for the transaction.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `MAKE_REFUND` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/tsys/make_refund.json) | Json having merchant details. | YES |
+

@@ -241,20 +241,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 
 
 
-`13. Process Payment Transaction:`
-
- 	This will does the payment transaction.
-
-### Payload
-
-| Key | Type | Value | Description | Required |
-| --- | ---- | ----- | ----------- | -------- |
-| `action` | string | `PROCESS_PAYMENT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/payu_process_payment.json) | Json having merchant details. | YES |
-
-
-
-`14. Direct Payment:`
+`13. Direct Payment:`
 
  	This will does the payment transaction without need of saving the payer first.
 
@@ -263,5 +250,17 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `DIRECT_PAYMENT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/payu_direct_payment.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/tsys/tsys_direct_payment.json) | Json having merchant details. | YES |
+
+
+`14. Make Refund:`
+
+ 	This will does the refund part for the transaction.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `MAKE_REFUND` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/tsys/make_refund.json) | Json having merchant details. | YES |
 
