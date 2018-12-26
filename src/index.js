@@ -560,18 +560,7 @@ const funGetPayersTransactions = function (BASE_URL,payload,callback) {
 
 const funAttachPayerWithMerchant = function (BASE_URL,payload,callback) {
   
-  let payerId = payload["meta"]["payerId"];
-  if (isNull(payerId)) {
-    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
-  }
-
-  let merchantId = payload["meta"]["merchantId"];
-  if (isNull(merchantId)) {
-    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
-  }
-  
-  
-  let url = `${BASE_URL}ezpayMerchants/attachPayerWithMerchant?payerId=${payerId}&merchantId=${merchantId}`;
+  let url = `${BASE_URL}ezpayMerchants/attachPayerWithMerchants`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {

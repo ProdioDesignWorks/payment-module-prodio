@@ -264,3 +264,15 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `MAKE_REFUND` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/tsys/make_refund.json) | Json having merchant details. | YES |
 
+
+`15. Attach Payer with Merchants:`
+
+ 	This function will attach any given payer with any given merchants.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `ATTACH_PAYER_MERCHANT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/tsys/attach_payer_merchant.json) | Json having merchant details. | YES |
+

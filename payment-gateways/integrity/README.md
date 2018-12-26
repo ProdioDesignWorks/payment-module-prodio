@@ -401,9 +401,9 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/integrity/get_payer_transactions_stats.json) | Json having merchant details. | YES |
 
 
-`25. Attach Payer with Merchant:`
+`25. Attach Payer with Merchants:`
 
- 	This function will attach any given payer with any given merchant.	
+ 	This function will attach any given payer with any given merchants.	
 
 ### Payload
 
