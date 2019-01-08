@@ -6,7 +6,13 @@
             "lastName": "Sharma",
             "email": "shashikant@prodio.in",
             "mobileNumber": "8097487977",
-            "address": "Valid Address",
+            "address": {
+                "country": "",
+                "state": "",
+                "city": "",
+                "streetAddress": "",
+                "zipCode": ""
+            },
             "paymentMethod": "CREDIT_CARD"
         }
     }
