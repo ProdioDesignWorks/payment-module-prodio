@@ -1,6 +1,6 @@
 {
   "name": "payment-module-prodio",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "NPM Module for Payment Services",
   "main": "lib/index.js",
   "scripts": {
