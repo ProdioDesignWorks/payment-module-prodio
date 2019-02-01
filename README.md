@@ -15,7 +15,7 @@ This project is started with an aim to reduce implementing and re-architecting c
 * [Integrity Payments](payment-gateways/integrity/README.md)
 * [PayU Money Biz](payment-gateways/payu/README.md)
 * [TSYS Cayan](payment-gateways/tsys/README.md)
-* [Open Edge](payment-gateways/open-edge/README.md)
+* [Open Edge](payment-gateways/openEdge/README.md)
 
 # Prerequisite (Things to do before installing this module):
  * Clone its dependency repository first on your server git clone https://github.com/ProdioDesignWorks/payment-services-prodio.git
