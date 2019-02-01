@@ -1,0 +1,12 @@
+{
+    "meta": {
+        "transactionId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(optional,You can get this transactionId from payment request transaction)*/  
+    	"buyerId":"", /* (optional) */
+    	"amount":"120.00",
+    	"cardInfo":{
+    		"cardNumber":"4111111111111111",
+    		"cardHolderName":"Shashikant Sharma",
+    		"expiryDate":"12/20"
+    	}
+    }
+}

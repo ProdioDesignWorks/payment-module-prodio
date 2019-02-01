@@ -1,0 +1,18 @@
+{
+	"meta": {
+		"transactionId": "22e47c6d-3d2a-4688-ad95-b75f1c1c4ed1",
+		"payerId": "f5ea0294-fc43-4692-a013-09b8cd2874e6",
+		"cardInfo": {
+			"cardNumber": "5149 6122 2222 2229",
+			"cardHolderName": "Shashikant Sharma",
+			"expDate": "12/20",
+			"cvv": "123",
+			"cardType": "VISA",
+			"entrymode": "KEYED",
+			"transaction_type": "CREDIT_CARD"
+		},
+		"return_url": "https://getezpay.com",
+		"success_url": "https://getezpay.com/admin",
+		"failureUrl": "https://getezpay.com/admin"
+	}
+}
