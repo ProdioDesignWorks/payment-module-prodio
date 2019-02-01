@@ -32,6 +32,7 @@ This project is started with an aim to reduce implementing and re-architecting c
  	* `npm install integrity-connector-prodio@latest --save`
  	* `npm install payu-connector-prodio@latest --save`
  	* `npm install tsys-connector-prodio@latest --save`
+ 	* `npm install open-edge-connector-prodio@latest --save`
 
 # Note:
 `payment-services-prodio` uses loopback as the core framework for developing API's, so all customisations, configurations, middlewares, events, and db connectors can be used which you would have used in loopback.
