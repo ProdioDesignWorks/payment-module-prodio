@@ -13,6 +13,7 @@
 		},
 		"return_url": "https://getezpay.com",
 		"success_url": "https://getezpay.com/admin",
-		"failureUrl": "https://getezpay.com/admin"
+		"failureUrl": "https://getezpay.com/admin",
+		"paymentHtmlUrl":"https://getezpay.com/admin/paymentConfirmation/payment.html"
 	}
 }
