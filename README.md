@@ -15,6 +15,7 @@ This project is started with an aim to reduce implementing and re-architecting c
 * [Integrity Payments](payment-gateways/integrity/README.md)
 * [PayU Money Biz](payment-gateways/payu/README.md)
 * [TSYS Cayan](payment-gateways/tsys/README.md)
+* [Open Edge](payment-gateways/openEdge/README.md)
 
 # Prerequisite (Things to do before installing this module):
  * Clone its dependency repository first on your server git clone https://github.com/ProdioDesignWorks/payment-services-prodio.git
@@ -31,6 +32,7 @@ This project is started with an aim to reduce implementing and re-architecting c
  	* `npm install integrity-connector-prodio@latest --save`
  	* `npm install payu-connector-prodio@latest --save`
  	* `npm install tsys-connector-prodio@latest --save`
+ 	* `npm install open-edge-connector-prodio@latest --save`
 
 # Note:
 `payment-services-prodio` uses loopback as the core framework for developing API's, so all customisations, configurations, middlewares, events, and db connectors can be used which you would have used in loopback.
