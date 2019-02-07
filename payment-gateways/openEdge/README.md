@@ -34,6 +34,13 @@ Require the payment-module-prodio module and initialize the payment npm module c
  const paymentObj = new paymentClass(BASE_URL);
  ``` 
 
+Include  https://github.com/ProdioDesignWorks/openedge-js-sdk to your front-end  repository
+openedge-js-sdk handles redirections on basis of success/failure  of payments done via open-edge payment gateway .
+
+
+
+
+
 
 ### Method
 
@@ -250,5 +257,6 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `PROCESS_PAYMENT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/payu_process_payment.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/openedge_process_payment.json) | Json having merchant details. | YES |
+
 
