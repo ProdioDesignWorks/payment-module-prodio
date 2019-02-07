@@ -4,6 +4,6 @@
 		"payerId": "f5ea0294-fc43-4692-a013-09b8cd2874e6",
 		"successUrl": "xxx-xxxxxx-xxxxxxx",   //redirection url should be an https url 
 		"failureUrl": "xxx-xxxxxx-xxxxxxx",   //should be an https url 
-		"paymentHtmlUrl":"xxx-xxxxxx-xxxxxxx"  //should be an https url 
+		"returnUrl":"xxx-xxxxxx-xxxxxxx"  //should be an https url 
 	}
 }
