@@ -119,6 +119,12 @@ function paymentServices(BASE_URL) {
         case "MAKE_REFUND":
           return funMakeRefund(BASE_URL,payload,callback);
         break;
+        case "VERIFY_CARD":
+          return funVerifyCardOE(BASE_URL,payload,callback);
+        break;
+        case "GET_ORDER_DETAILS":
+          return funGetOrderDetails(BASE_URL,payload,callback);
+        break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -440,12 +446,17 @@ const funProcessPayment = function (BASE_URL,payload,callback) {
     return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
   }
 
+  let hostBaseURL = payload["meta"]["hostBaseURL"];
+  if (isNull(hostBaseURL)) {
+    return callback(new HttpErrors.BadRequest('hostBaseURL Id is mandatory.', { expose: false }));
+  }
+
   let cardId = "";
   if (!isNull(payload["meta"]["cardId"])) {
     cardId = payload["meta"]["cardId"];
   }
   
-  let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}&hostBaseURL=${hostBaseURL}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -590,6 +601,39 @@ const funGetMerchantsForPayer = function (BASE_URL,payload,callback) {
 const funMakeRefund = function (BASE_URL,payload,callback) {
 
   let url = `${BASE_URL}ezpayPaymentTransactions/makeRefund`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funVerifyCardOE = function (BASE_URL,payload,callback) {
+
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/verifyCreditCardOE`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funGetOrderDetails = function (BASE_URL,payload,callback) {
+
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/getOrderDetails`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {

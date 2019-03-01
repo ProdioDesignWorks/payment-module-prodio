@@ -260,3 +260,39 @@ openedge-js-sdk handles redirections on basis of success/failure  of payments do
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/openedge_process_payment.json) | Json having merchant details. | YES |
 
 
+`14. VERIFY & SAVE CREDIT CARD:`
+
+ 	This will Verify whether the credit card is valid or not and then save it. This is required step before starting auto recurring payment or installments feature.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `VERIFY_CARD` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/verify_card.json) | Json having merchant details. | YES |
+
+
+
+`15. Get Saved Cards Listing For Payer:`
+
+ 	This function will allow to save credit cards for payers, if opted.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_SAVED_CARDS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/get_saved_cards.json) | Json having merchant details. | YES |
+
+
+`16. Remove Card for Payer:`
+
+ 	This function will allow to save credit cards for payers, if opted.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `REMOVE_CARD` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/remove_card.json) | Json having merchant details. | YES |
+
