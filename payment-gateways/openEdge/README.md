@@ -296,3 +296,52 @@ openedge-js-sdk handles redirections on basis of success/failure  of payments do
 | `action` | string | `REMOVE_CARD` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/remove_card.json) | Json having merchant details. | YES |
 
+
+`17. Payment with saved card:`
+
+ 	This function will allow to do direct payment with selected saved card.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `PAY_WITH_SAVED_CARD` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/pay_direct_with_saved_card.json) | Json having merchant details. | YES |
+
+
+`18. Add New Insallment within a transaction:`
+
+ 	This function will allow to add new installment within a transaction.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `ADD_INSTALLMENT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/add_installment.json) | Json having merchant details. | YES |
+
+
+`19. Edit a Insallment within a transaction:`
+
+ 	This function will allow to add new installment within a transaction.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `EDIT_INSTALLMENT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/edit_installment.json) | Json having merchant details. | YES |
+
+
+
+`20. Remove a Insallment within a transaction:`
+
+ 	This function will allow to add new installment within a transaction.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `REMOVE_INSTALLMENT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/remove_installment.json) | Json having merchant details. | YES |
+
