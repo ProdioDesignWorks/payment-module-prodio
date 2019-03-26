@@ -119,6 +119,24 @@ function paymentServices(BASE_URL) {
         case "MAKE_REFUND":
           return funMakeRefund(BASE_URL,payload,callback);
         break;
+        case "VERIFY_CARD":
+          return funVerifyCardOE(BASE_URL,payload,callback);
+        break;
+        case "GET_ORDER_DETAILS":
+          return funGetOrderDetails(BASE_URL,payload,callback);
+        break;
+        case "PAY_WITH_SAVED_CARD":
+          return funPayWithSavedCard(BASE_URL,payload,callback);
+        break;
+        case "ADD_INSTALLMENT":
+          return funAddInstallment(BASE_URL,payload,callback);
+        break;
+        case "EDIT_INSTALLMENT":
+          return funEditInstallment(BASE_URL,payload,callback);
+        break;
+        case "REMOVE_INSTALLMENT":
+          return funRemoveInstallment(BASE_URL,payload,callback);
+        break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -440,12 +458,17 @@ const funProcessPayment = function (BASE_URL,payload,callback) {
     return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
   }
 
+  let hostBaseURL = payload["meta"]["hostBaseURL"];
+  if (isNull(hostBaseURL)) {
+    return callback(new HttpErrors.BadRequest('hostBaseURL Id is mandatory.', { expose: false }));
+  }
+
   let cardId = "";
   if (!isNull(payload["meta"]["cardId"])) {
     cardId = payload["meta"]["cardId"];
   }
   
-  let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}&hostBaseURL=${hostBaseURL}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -597,6 +620,126 @@ const funMakeRefund = function (BASE_URL,payload,callback) {
     return callback(json);
   });
 }
+
+const funVerifyCardOE = function (BASE_URL,payload,callback) {
+
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/verifyCreditCardOE`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funGetOrderDetails = function (BASE_URL,payload,callback) {
+
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/getOrderDetails`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+
+const funPayWithSavedCard = function (BASE_URL,payload,callback) {
+
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+
+  let cardId = payload["meta"]["cardId"];
+  if (isNull(cardId)) {
+    return callback(new HttpErrors.BadRequest('card Id is mandatory.', { expose: false }));
+  }
+
+  let amount = payload["meta"]["amount"];
+  if (isNull(amount)) {
+    return callback(new HttpErrors.BadRequest('amount is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/paymentWithSavedCard`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+
+const funAddInstallment = function (BASE_URL,payload,callback) {
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
+  }
+
+  let amount = payload["meta"]["amount"];
+  if (isNull(amount)) {
+    return callback(new HttpErrors.BadRequest('amount is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}PaymentInstallments/addNewInstallment`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funEditInstallment = function (BASE_URL,payload,callback) {
+
+  let installmentId = payload["meta"]["installmentId"];
+  if (isNull(installmentId)) {
+    return callback(new HttpErrors.BadRequest('installment Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}PaymentInstallments/editInstallment`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
+const funRemoveInstallment = function (BASE_URL,payload,callback) {
+
+  let installmentId = payload["meta"]["installmentId"];
+  if (isNull(installmentId)) {
+    return callback(new HttpErrors.BadRequest('installment Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}PaymentInstallments/removeInstallment`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = CircularJSON.stringify(error);
+    return callback(json);
+  });
+}
+
 
 
 module.exports = paymentServices;
