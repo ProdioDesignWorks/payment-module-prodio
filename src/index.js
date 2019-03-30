@@ -6,7 +6,7 @@
  */ 
 // eslint-disable-next-line import/prefer-default-export
 const axios = require('axios');
-const CircularJSON = require('circular-json');
+const {parse, stringify} = require('flatted/cjs');
 //const BASE_URL = `https://5m4hb8aet1.execute-api.us-west-2.amazonaws.com/prod/`;
 const HttpErrors = require('http-errors');
 
@@ -167,7 +167,7 @@ const funCreateMerchant = function (BASE_URL,payload,callback) {
     return callback(response);
   })
   .catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -180,7 +180,7 @@ const funGetAllMerchants = function (BASE_URL,payload,callback) {
     return callback(response);
   })
   .catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -200,7 +200,7 @@ const funMerchantActionvationStatus = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -215,7 +215,7 @@ const funGetMerchantId = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -229,7 +229,7 @@ const funMerchantProfile = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -244,7 +244,7 @@ const funUpdateMerchantProfile = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -258,7 +258,7 @@ const funDeactivateAccount = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -275,7 +275,7 @@ const funCreatePayer = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -289,7 +289,7 @@ const funEditPayer = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -303,7 +303,7 @@ const funRemovePayer = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -318,7 +318,7 @@ const funImportPayers = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -333,7 +333,7 @@ const funGetPayersListing = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -348,7 +348,7 @@ const funGetPayerProfile = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -368,7 +368,7 @@ const funCreateTransaction = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -384,7 +384,7 @@ const funSaveCard = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -405,7 +405,7 @@ const funRemoveCard = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -421,7 +421,7 @@ const funSavedCardsListing = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -441,7 +441,7 @@ const funGetTransactionsListing = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -472,7 +472,7 @@ const funProcessPayment = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -486,7 +486,7 @@ const funDirectPayment = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -503,7 +503,7 @@ const funGetTransactionDetails = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -519,7 +519,7 @@ const funGetTransactionStats = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -540,7 +540,7 @@ const funGetPayerTransactionStats = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -556,7 +556,7 @@ const funGetNonPayersListing = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -576,7 +576,7 @@ const funGetPayersTransactions = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -587,7 +587,7 @@ const funAttachPayerWithMerchant = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -603,7 +603,7 @@ const funGetMerchantsForPayer = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -616,7 +616,7 @@ const funMakeRefund = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -637,7 +637,7 @@ const funVerifyCardOE = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -649,7 +649,7 @@ const funGetOrderDetails = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -681,7 +681,7 @@ const funPayWithSavedCard = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -703,7 +703,7 @@ const funAddInstallment = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -719,7 +719,7 @@ const funEditInstallment = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }
@@ -735,7 +735,7 @@ const funRemoveInstallment = function (BASE_URL,payload,callback) {
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
-    let json = CircularJSON.stringify(error);
+    let json = stringify(error);
     return callback(json);
   });
 }

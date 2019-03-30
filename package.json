@@ -1,6 +1,6 @@
 {
   "name": "payment-module-prodio",
-  "version": "1.0.22",
+  "version": "1.0.24",
   "description": "NPM Module for Payment Services",
   "main": "lib/index.js",
   "scripts": {
@@ -37,7 +37,7 @@
   "homepage": "https://github.com/ProdioDesignWorks/payment-module-prodio#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "circular-json": "^0.5.9"
+    "flatted": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
