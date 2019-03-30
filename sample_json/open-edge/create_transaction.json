@@ -83,7 +83,7 @@
             }
         },
         "data": {
-            "paymentMethodType": "CREDIT_CARD"
+            "paymentMethodType": "CREDIT_CARD" //or DEBIT_CARD
         }
     }
 }
