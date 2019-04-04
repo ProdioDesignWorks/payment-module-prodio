@@ -1,27 +1,25 @@
 {
-    "meta": {
-    	"merchantId":"23412-2314124-daqwsdf3-23213",
-    	"payerId":"sdfwe-sdf324-sdfvdvf3-sfdvd", // either payer id or payer info
-    	"payerInfo":{
-    		"firstName": "Shashikant",
-            "lastName": "Sharma",
-            "email": "shashikant@prodio.in",
-            "mobileNumber": "8097487977",
-            "address": "Valid Address",
-            "paymentMethod": "CREDIT_CARD"
-    	},
-    	"paymentInfo":{
-    		"amount":"200",
-    		"taxAmount":"0.00",
-    		"invoiceNumber":"12342123"
-    	},
-    	"cardInfo":{
-    		"cardNumber":"4012000033330026",
-    		"expirationDate":"1218",
-    		"cardHolderName":"John Doe",
-    		"cvv":"123",
-    		"street":"1 Federal Street",
-    		"zip":"02110"
-    	}
-    }
+	"merchantId":"23412-2314124-daqwsdf3-23213",
+	"payerId":"sdfwe-sdf324-sdfvdvf3-sfdvd", // either payer id or payer info
+	"payerInfo":{
+		"firstName": "Shashikant",
+        "lastName": "Sharma",
+        "email": "shashikant@prodio.in",
+        "mobileNumber": "8097487977",
+        "address": "Valid Address",
+        "paymentMethod": "CREDIT_CARD"
+	},
+	"paymentInfo":{
+		"amount":"200",
+		"taxAmount":"0.00",
+		"invoiceNumber":"12342123"
+	},
+	"cardInfo":{
+		"cardNumber":"4012000033330026",
+		"expirationDate":"1218",
+		"cardHolderName":"John Doe",
+		"cvv":"123",
+		"street":"1 Federal Street",
+		"zip":"02110"
+	}
 }

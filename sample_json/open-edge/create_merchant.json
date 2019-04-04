@@ -1,5 +1,4 @@
-{
-    "meta": {
+ {
         "userId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(required)*/
         "basic": {
             "firstName": "Shashikant",
@@ -71,5 +70,5 @@
                 "paymentMethod": "CREDIT_CARD"
             }
         ]
-    }
+    
 }

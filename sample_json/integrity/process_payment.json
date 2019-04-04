@@ -1,15 +1,13 @@
 {
-    "meta": {
-        "transactionId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(required,You can get this transactionId from payment request transaction)*/  
-		"payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (required,You can get payerId from listing of payers api) */
-		"cardId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (optional, either send card id or send card info,You can get cardId from listing of saved cards api) */
-		"cardInfo":{                                     /*(optional, if no cardId provided send card info) */
-			"cardNumber":"4111111111111111",
-			"cardHolderName":"Shashikant Sharma",
-			"expDate":"MM/YYYY",
-			"cvv":"123",
-			"cardType":"VISA",
-			"saveCard": false
-		}
-    }
+    "transactionId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(required,You can get this transactionId from payment request transaction)*/  
+	"payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (required,You can get payerId from listing of payers api) */
+	"cardId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (optional, either send card id or send card info,You can get cardId from listing of saved cards api) */
+	"cardInfo":{                                     /*(optional, if no cardId provided send card info) */
+		"cardNumber":"4111111111111111",
+		"cardHolderName":"Shashikant Sharma",
+		"expDate":"MM/YYYY",
+		"cvv":"123",
+		"cardType":"VISA",
+		"saveCard": false
+	}
 }

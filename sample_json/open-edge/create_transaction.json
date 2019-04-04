@@ -1,89 +1,88 @@
 {
-    "meta": {
-        "hostBaseURL":"http://dev.getezpay.com:3010/", //base url of the host where service apis are running
-        "merchantId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(You can get this merchantId from the response of createMerchant or getMerchantId function)*/  
-        "payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (You can get payerId from listing of payers api) */
-        "payerName":"",
-        "title":"",
-        "currency": "USD",
-        "isRecurring": false,
-        "totalAmount":"",
-        "invoiceNumber":"",
-        "invoiceDate":"MM/DD/YYYY",
-        "dueDate": "MM/DD/YYYY",
-        "paymentFrequency":"ONETIME/INSTALLMENTS/RECURRING", //default is ONETIME
-        "downPayment":"100",
-        "installmentItems":{                     // Should be used when paymentFrequency is INSTALLMENTS
-            "installments":[
-                {
-                    "label":"",
-                    "amount":"",
-                    "dueDate":"MM/DD/YYYY",
-                    "metaData":{}
-                },
-                {
-                    "label":"",
-                    "amount":"",
-                    "dueDate":"MM/DD/YYYY",
-                    "metaData":{}
-                }
-            ]
-        },
-        "recurringItems":{                       // Should be used when paymentFrequency is RECURRING
-            "recurringAmount":"200",
-            "recurringInterval":"DAILY/MONTHLY/QUATERLY/HALFYEARLY/YEARLY", //curretly default monthly
-            "recurringIntervalCount":"6",
-            "installments":[
-                {
-                    "label":"",
-                    "amount":"",
-                    "dueDate":"MM/DD/YYYY",
-                    "metaData":{}
-                },
-                {
-                    "label":"",
-                    "amount":"",
-                    "dueDate":"MM/DD/YYYY",
-                    "metaData":{}
-                }
-            ]
-        },
-        "displayItems": [
+    "hostBaseURL":"http://dev.getezpay.com:3010/", //base url of the host where service apis are running
+    "merchantId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(You can get this merchantId from the response of createMerchant or getMerchantId function)*/  
+    "payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (You can get payerId from listing of payers api) */
+    "payerName":"",
+    "title":"",
+    "currency": "USD",
+    "isRecurring": false,
+    "totalAmount":"",
+    "invoiceNumber":"",
+    "invoiceDate":"MM/DD/YYYY",
+    "dueDate": "MM/DD/YYYY",
+    "paymentFrequency":"ONETIME/INSTALLMENTS/RECURRING", //default is ONETIME
+    "downPayment":"100",
+    "installmentItems":{                     // Should be used when paymentFrequency is INSTALLMENTS
+        "installments":[
             {
-                "serviceCode": "#1245",
-                "serviceName": "Teeth Cleaning",
-                "description": "laurem ipsum",
-                "amount": {
-                    "value": "2.50",
-                    "tax":"",
-                    "discount":"",
-                    "currency": "USD"
-                }
+                "label":"",
+                "amount":"",
+                "dueDate":"MM/DD/YYYY",
+                "metaData":{}
             },
             {
-                "serviceCode": "#1247",
-                "serviceName": "Teeth Cleaning",
-                "description": "laurem ipsum",
-                "amount": {
-                    "value": "2.50",
-                    "tax":"",
-                    "discount":"",
-                    "currency": "USD"
-                }
+                "label":"",
+                "amount":"",
+                "dueDate":"MM/DD/YYYY",
+                "metaData":{}
             }
-        ],
-        "total": {
-            "label": "My Merchant",
+        ]
+    },
+    "recurringItems":{                       // Should be used when paymentFrequency is RECURRING
+        "recurringAmount":"200",
+        "recurringInterval":"DAILY/MONTHLY/QUATERLY/HALFYEARLY/YEARLY", //curretly default monthly
+        "recurringIntervalCount":"6",
+        "installments":[
+            {
+                "label":"",
+                "amount":"",
+                "dueDate":"MM/DD/YYYY",
+                "metaData":{}
+            },
+            {
+                "label":"",
+                "amount":"",
+                "dueDate":"MM/DD/YYYY",
+                "metaData":{}
+            }
+        ]
+    },
+    "displayItems": [
+        {
+            "serviceCode": "#1245",
+            "serviceName": "Teeth Cleaning",
+            "description": "laurem ipsum",
             "amount": {
-                "subTotal":"",
+                "value": "2.50",
                 "tax":"",
                 "discount":"",
-                "value": "5000",
                 "currency": "USD"
             }
         },
-        "data": {
-            "paymentMethodType": "CREDIT_CARD" //or DEBIT_CARD
+        {
+            "serviceCode": "#1247",
+            "serviceName": "Teeth Cleaning",
+            "description": "laurem ipsum",
+            "amount": {
+                "value": "2.50",
+                "tax":"",
+                "discount":"",
+                "currency": "USD"
+            }
         }
+    ],
+    "total": {
+        "label": "My Merchant",
+        "amount": {
+            "subTotal":"",
+            "tax":"",
+            "discount":"",
+            "value": "5000",
+            "currency": "USD"
+        }
+    },
+    "data": {
+        "paymentMethodType": "CREDIT_CARD" //or DEBIT_CARD
     }
+    
 }
