@@ -1,75 +1,73 @@
 {
-    "meta": {
-        "userId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(required)*/
-        "basic": {
-            "firstName": "Shashikant",
-            "lastName": "Sharma",
-            "email": "shashikant@prodio.in",
-            "password": "shashikant23",
-            "mobileNumber": "8097487977",
-            "dateOfBirth": "MM-DD-YYYY",
-            "profilePictureUrl": "",
-            "ssn": ""
+    "userId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(required)*/
+    "basic": {
+        "firstName": "Shashikant",
+        "lastName": "Sharma",
+        "email": "shashikant@prodio.in",
+        "password": "shashikant23",
+        "mobileNumber": "8097487977",
+        "dateOfBirth": "MM-DD-YYYY",
+        "profilePictureUrl": "",
+        "ssn": ""
+    },
+    "business": {
+        "accountName":"Shashikant Sharma",
+        "businessLogoUrl": "",
+        "routingNumber":"123456789",
+        "accountNumber":"134121314131",
+        "fedTaxId":"123456789",
+        "businessName": "BeingExpert Inc.",
+        "dbaName": "BeingExpert Inc.",
+        "taxId": "",
+        "contactEmail": "shashikant@prodio.in",
+        "contactNumber": "8097487977",
+        "addressSameAsUser": "true",
+        "address": {                     /* (required) */
+            "country": "",
+            "state": "",
+            "city": "",
+            "streetAddress": "",
+            "zipCode": ""
+        }
+    },
+    "billing": {
+        "cardHolderName": "Shashikant Sharma",
+        "creditCardNo": "4356234589794567",
+        "expiryDate": "12/2020",
+        "cvv": "345",
+        "saveCard": "false",
+        "addressSameAsBusiness": "false",
+        "address": {
+            "country": "",
+            "state": "",
+            "city": "",
+            "streetAddress": "",
+            "zipCode": ""
+        }
+    },
+    "payees": [{
+            "firstName": "Pawan",
+            "lastName": "Wagh",
+            "email": "pawan@prodio.in",
+            "mobileNumber": "12312443222",
+            "address": "test address",
+            "paymentMethod": "CREDIT_CARD"
         },
-        "business": {
-            "accountName":"Shashikant Sharma",
-            "businessLogoUrl": "",
-            "routingNumber":"123456789",
-            "accountNumber":"134121314131",
-            "fedTaxId":"123456789",
-            "businessName": "BeingExpert Inc.",
-            "dbaName": "BeingExpert Inc.",
-            "taxId": "",
-            "contactEmail": "shashikant@prodio.in",
-            "contactNumber": "8097487977",
-            "addressSameAsUser": "true",
-            "address": {                     /* (required) */
-                "country": "",
-                "state": "",
-                "city": "",
-                "streetAddress": "",
-                "zipCode": ""
-            }
+        {
+            "firstName": "Anurag",
+            "lastName": "Tiwari",
+            "email": "anurag@prodio.in",
+            "mobileNumber": "12312443222",
+            "address": "test address",
+            "paymentMethod": "CREDIT_CARD"
         },
-        "billing": {
-            "cardHolderName": "Shashikant Sharma",
-            "creditCardNo": "4356234589794567",
-            "expiryDate": "12/2020",
-            "cvv": "345",
-            "saveCard": "false",
-            "addressSameAsBusiness": "false",
-            "address": {
-                "country": "",
-                "state": "",
-                "city": "",
-                "streetAddress": "",
-                "zipCode": ""
-            }
-        },
-        "payees": [{
-                "firstName": "Pawan",
-                "lastName": "Wagh",
-                "email": "pawan@prodio.in",
-                "mobileNumber": "12312443222",
-                "address": "test address",
-                "paymentMethod": "CREDIT_CARD"
-            },
-            {
-                "firstName": "Anurag",
-                "lastName": "Tiwari",
-                "email": "anurag@prodio.in",
-                "mobileNumber": "12312443222",
-                "address": "test address",
-                "paymentMethod": "CREDIT_CARD"
-            },
-            {
-                "firstName": "Vatsal",
-                "lastName": "Shah",
-                "email": "vatsal@prodio.in",
-                "mobileNumber": "123893222",
-                "address": "test address",
-                "paymentMethod": "CREDIT_CARD"
-            }
-        ]
-    }
+        {
+            "firstName": "Vatsal",
+            "lastName": "Shah",
+            "email": "vatsal@prodio.in",
+            "mobileNumber": "123893222",
+            "address": "test address",
+            "paymentMethod": "CREDIT_CARD"
+        }
+    ]
 }

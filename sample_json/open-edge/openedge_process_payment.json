@@ -1,11 +1,10 @@
 {
-	"meta": {
-		"transactionId": "22e47c6d-3d2a-4688-ad95-b75f1c1c4ed1",
-		"payerId": "f5ea0294-fc43-4692-a013-09b8cd2874e6",
-		"cardType":"CREDIT_CARD", // or DEBIT_CARD - default is CREDIT_CARD
-		"hostBaseURL":"http://dev.getezpay.com:3010/", //base url of the host where service apis are running
-		"successUrl": "xxx-xxxxxx-xxxxxxx",   //redirection url should be an http or https url 
-		"failureUrl": "xxx-xxxxxx-xxxxxxx",   //should be an http or https url 
-		"returnUrl":"xxx-xxxxxx-xxxxxxx"  //should be an http or https url 
-	}
+	"transactionId": "22e47c6d-3d2a-4688-ad95-b75f1c1c4ed1",
+	"payerId": "f5ea0294-fc43-4692-a013-09b8cd2874e6",
+	"cardType":"CREDIT_CARD", // or DEBIT_CARD - default is CREDIT_CARD
+	"hostBaseURL":"http://dev.getezpay.com:3010/", //base url of the host where service apis are running
+	"successUrl": "xxx-xxxxxx-xxxxxxx",   //redirection url should be an http or https url 
+	"failureUrl": "xxx-xxxxxx-xxxxxxx",   //should be an http or https url 
+	"returnUrl":"xxx-xxxxxx-xxxxxxx"  //should be an http or https url 
+	
 }

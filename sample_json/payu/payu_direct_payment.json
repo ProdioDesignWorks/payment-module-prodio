@@ -1,15 +1,13 @@
 {
-    "meta": {
-    	"merchantId":"23412-2314124-daqwsdf3-23213",
-    	"payerId":"sdfwe-sdf324-sdfvdvf3-sfdvd", // either payer id or payer info
-		"orderTitle": "test name",
-		"orderNumber": "123",
-		"amount": "200",
-		"email":"shashikant@prodio.in",
-		"phone":"809757778",
-		"firstname":"shashikant",
-		"lastname":"sharma",
-		"successUrl": "https://alpha.kinektapp.com/success", //"http://localhost:3000/payu/success"
-		"failureUrl": "https://alpha.kinektapp.com/failure" //"http://localhost:3000/payu/fail"
-    }
+	"merchantId":"23412-2314124-daqwsdf3-23213",
+	"payerId":"sdfwe-sdf324-sdfvdvf3-sfdvd", // either payer id or payer info
+	"orderTitle": "test name",
+	"orderNumber": "123",
+	"amount": "200",
+	"email":"shashikant@prodio.in",
+	"phone":"809757778",
+	"firstname":"shashikant",
+	"lastname":"sharma",
+	"successUrl": "https://alpha.kinektapp.com/success", //"http://localhost:3000/payu/success"
+	"failureUrl": "https://alpha.kinektapp.com/failure" //"http://localhost:3000/payu/fail"
 }
