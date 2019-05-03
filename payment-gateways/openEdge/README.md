@@ -345,3 +345,52 @@ openedge-js-sdk handles redirections on basis of success/failure  of payments do
 | `action` | string | `REMOVE_INSTALLMENT` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/remove_installment.json) | Json having merchant details. | YES |
 
+
+
+`21. Update a transaction payment status:`
+
+ 	This function will update the transaction status manually.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `UPDATE_TRANSACTION_STATUS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/update_transaction_status.json) | Json having merchant details. | YES |
+
+
+`22. Edit multiple installments together:`
+
+ 	This function will Edit multiple installments.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `EDIT_MULTIPLE_INSTALLMENTS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/edit_multiple_installments.json) | Json having merchant details. | YES |
+
+
+`23. Enable multiple installments:`
+
+ 	This function will allow to Enable multiple installments.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `ENABLE_INSTALLMENTS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/enable_installments.json) | Json having merchant details. | YES |
+
+
+`24. Disable multiple installments:`
+
+ 	This function will allow to Disable multiple installments.	
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `DISABLE_INSTALLMENTS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/disable_installments.json) | Json having merchant details. | YES |
+

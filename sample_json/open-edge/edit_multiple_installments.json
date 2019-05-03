@@ -1,0 +1,21 @@
+{
+    "transactionId":"4c38b4f2-aee5-4482-bcd8-377435bea47b", /*(You can get this transactionId from the response of listing of transactions function)*/ 
+    "installments":[
+    	{
+    		"installmentId":"8c38b3f2-aee5-4482-bcd8-47435bea47b", /*(You can get this transactionId from the response of listing of transactions function)*/  
+		    "installmentLabel":"Payment for X thing",
+		    "amount":"100",
+		    "dueDate":"MM/DD/YYYY",
+		    "paymentStatus":"PENDING", //PAID/FAILED
+		    "metaData":{}
+    	},
+    	{
+    		"installmentId":"8c38b3f2-aee5-4482-22238-47435bea47b", /*(You can get this transactionId from the response of listing of transactions function)*/  
+		    "installmentLabel":"Payment for Y thing",
+		    "amount":"300",
+		    "dueDate":"MM/DD/YYYY",
+		    "paymentStatus":"PENDING", //PAID/FAILED
+		    "metaData":{}
+    	}
+    ]
+}
