@@ -134,8 +134,20 @@ function paymentServices(BASE_URL) {
         case "EDIT_INSTALLMENT":
           return funEditInstallment(BASE_URL,payload,callback);
         break;
+        case "EDIT_MULTIPLE_INSTALLMENTS":
+          return funEditMultipleInstallment(BASE_URL,payload,callback);
+        break;
         case "REMOVE_INSTALLMENT":
           return funRemoveInstallment(BASE_URL,payload,callback);
+        break;
+        case "ENABLE_INSTALLMENTS":
+          return funEnableInstallments(BASE_URL,payload,callback);
+        break;
+        case "DISABLE_INSTALLMENTS":
+          return funDisableInstallments(BASE_URL,payload,callback);
+        break;
+        case "UPDATE_TRANSACTION_STATUS":
+          return funUpdateTransactionStatus(BASE_URL,payload,callback);
         break;
         default:
           let errorMessage = `Please add BaseUrl.`;
@@ -724,6 +736,61 @@ const funEditInstallment = function (BASE_URL,payload,callback) {
   });
 }
 
+
+const funEnableInstallments = function (BASE_URL,payload,callback) {
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transactionId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}PaymentInstallments/enableInstallments`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+
+const funDisableInstallments = function (BASE_URL,payload,callback) {
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transactionId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}PaymentInstallments/disbleInstallments`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+
+
+
+const funEditMultipleInstallment = function (BASE_URL,payload,callback) {
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transactionId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}PaymentInstallments/editMultipleInstallments`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+
+
 const funRemoveInstallment = function (BASE_URL,payload,callback) {
 
   let installmentId = payload["meta"]["installmentId"];
@@ -732,6 +799,27 @@ const funRemoveInstallment = function (BASE_URL,payload,callback) {
   }
 
   let url = `${BASE_URL}PaymentInstallments/removeInstallment`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funUpdateTransactionStatus = function (BASE_URL,payload,callback) {
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transactionId is mandatory.', { expose: false }));
+  }
+
+  let transactionStatus = payload["meta"]["transactionStatus"];
+  if (isNull(transactionStatus)) {
+    return callback(new HttpErrors.BadRequest('transactionStatus is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/setTransactionStatusManually?transactionId=${transactionId}&transactionStatus=${transactionStatus}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
