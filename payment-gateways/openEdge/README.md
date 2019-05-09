@@ -394,3 +394,34 @@ openedge-js-sdk handles redirections on basis of success/failure  of payments do
 | `action` | string | `DISABLE_INSTALLMENTS` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/disable_installments.json) | Json having merchant details. | YES |
 
+
+`25. Get Revenue Graph data points :`
+
+ 	This function will allow to create revenue graph.	
+
+ 	Note: Response will be array of these item format - e.g [ ['Jan',{totalRevenueInDollars}],['Feb',{totalRevenueInDollars}] ]
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_REVENUE_GRAPH` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/get_revenue_graph.json) | Json having merchant details. | YES |
+
+
+`26. Get Transaction Graph data points :`
+
+ 	This function will allow to create Transaction graph.	
+
+ 	Note: Response will be array of these item format - e.g 
+ 	 [ ['Jan',{FailedDollarsValue},{PaidDollarsValue},{PendingDollarsValue}] ]
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_TRANSACTION_GRAPH` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/get_transaction_graph.json) | Json having merchant details. | YES |
+
+
+
