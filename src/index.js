@@ -149,6 +149,12 @@ function paymentServices(BASE_URL) {
         case "UPDATE_TRANSACTION_STATUS":
           return funUpdateTransactionStatus(BASE_URL,payload,callback);
         break;
+        case "GET_REVENUE_GRAPH":
+          return funGetRevenueGraph(BASE_URL,payload,callback);
+        break;
+        case "GET_TRANSACTION_GRAPH":
+          return funGetTransactionGraph(BASE_URL,payload,callback);
+        break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -828,6 +834,50 @@ const funUpdateTransactionStatus = function (BASE_URL,payload,callback) {
   });
 }
 
+
+
+const funGetRevenueGraph = function (BASE_URL,payload,callback) {
+
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchantId is mandatory.', { expose: false }));
+  }
+
+  let year = "";
+  if (!isNull(payload["meta"]["year"])) {
+    year = payload["meta"]["year"];
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/getRevenueGraphData?merchantId=${merchantId}&year=${year}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+
+const funGetTransactionGraph = function (BASE_URL,payload,callback) {
+
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchantId is mandatory.', { expose: false }));
+  }
+
+  let year = "";
+  if (!isNull(payload["meta"]["year"])) {
+    year = payload["meta"]["year"];
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionGraphData?merchantId=${merchantId}&year=${year}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
 
 
 module.exports = paymentServices;
