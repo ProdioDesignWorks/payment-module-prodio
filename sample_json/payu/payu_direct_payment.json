@@ -1,6 +1,7 @@
 {
 	"merchantId":"23412-2314124-daqwsdf3-23213",
 	"payerId":"sdfwe-sdf324-sdfvdvf3-sfdvd", // either payer id or payer info
+	"projectId":"sdfwe-sdf324-sdfvdvf3-sfdvd", // your project id or may be sub-merchant id, optional
 	"orderTitle": "test name",
 	"orderNumber": "123",
 	"amount": "200",

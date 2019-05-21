@@ -101,6 +101,9 @@ function paymentServices(BASE_URL) {
         case "GET_TRANSACTION_STATS":
           return funGetTransactionStats(BASE_URL,payload,callback);
         break;
+        case "GET_PROJECT_TRANSACTION_STATS":
+          return funGetProjectTransactionStats(BASE_URL,payload,callback);
+        break;
         case "GET_PAYER_TRANSACTION_STATS":
           return funGetPayerTransactionStats(BASE_URL,payload,callback);
         break;
@@ -518,6 +521,28 @@ const funGetTransactionDetails = function (BASE_URL,payload,callback) {
   }
   
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionDetails?transactionId=${transactionId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+
+const funGetProjectTransactionStats = function (BASE_URL,payload,callback) {
+  
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+
+  let projectId = payload["meta"]["projectId"];
+  if (isNull(projectId)) {
+    return callback(new HttpErrors.BadRequest('project Id is mandatory.', { expose: false }));
+  }
+  
+  let url = `${BASE_URL}ezpayPaymentTransactions/getProjectTransactionStats?merchantId=${merchantId}&projectId=${projectId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
