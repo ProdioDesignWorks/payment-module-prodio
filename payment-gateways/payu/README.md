@@ -275,5 +275,17 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `MAKE_REFUND` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/tsys/make_refund.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/make_refund.json) | Json having merchant details. | YES |
+
+
+`16. Get Project Transaction Stats:`
+
+ 	This will get the project transaction stats.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_PROJECT_TRANSACTION_STATS` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/get_project_transaction_stats.json) | Json having merchant details. | YES |
 

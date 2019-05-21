@@ -1,0 +1,4 @@
+{
+    "merchantId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(optional,You can get this transactionId from payment request transaction)*/  
+    "projectId":"" /* required */
+}
