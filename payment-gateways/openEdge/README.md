@@ -424,4 +424,13 @@ openedge-js-sdk handles redirections on basis of success/failure  of payments do
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/get_transaction_graph.json) | Json having merchant details. | YES |
 
 
+`27. Get Revenue Per Payer:`
 
+ 	This will get listing of all payers with the total amount they have paid so far.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_REVENUE_PER_PAYER` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/get_revenue_per_payer.json) | Json having merchant details. | YES |
