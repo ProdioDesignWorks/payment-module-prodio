@@ -1,0 +1,12 @@
+{
+    "merchantId":"bb15dc52-86e2-45c0-b5ab-889aebf7a1d6", /*(You can get this merchantId from the response of createMerchant or getMerchantId function)*/  
+    "payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (You can get payerId from listing of payers api) */
+    "transactionId":"",
+    "totalAmount":"",
+    "charge_type":"DEBIT",
+    "account_type":0,
+    "transaction_condition_code":"52",
+    "routing_number":"",
+    "account_number":"",
+    "name_on_account":""
+}
