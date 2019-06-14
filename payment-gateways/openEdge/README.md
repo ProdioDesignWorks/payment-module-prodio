@@ -19,6 +19,8 @@
 	* Process Refund for Transaction
 
 * Reports/Stats
+
+* ACH Payments
  
 
 ### Installation
@@ -434,3 +436,16 @@ openedge-js-sdk handles redirections on basis of success/failure  of payments do
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_REVENUE_PER_PAYER` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/get_revenue_per_payer.json) | Json having merchant details. | YES |
+
+
+
+`28. ACH Payment:`
+
+ 	This will allows to do cheque payments.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `ACH_PAYMENT` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/open-edge/ach_payment.json) | Json having merchant details. | YES |
