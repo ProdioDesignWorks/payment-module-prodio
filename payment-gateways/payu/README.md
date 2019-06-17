@@ -301,3 +301,15 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `action` | string | `GET_REVENUE_PER_PAYER` | key which defines the type of action to be performed | YES |
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/get_revenue_per_payer.json) | Json having merchant details. | YES |
 
+
+`18. Get Project Payers:`
+
+ 	This will get listing of all payers who paid for the project.
+
+### Payload
+
+| Key | Type | Value | Description | Required |
+| --- | ---- | ----- | ----------- | -------- |
+| `action` | string | `GET_PROJECT_PAYERS_LISTING` | key which defines the type of action to be performed | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/get_project_payers.json) | Json having merchant details. | YES |
+
