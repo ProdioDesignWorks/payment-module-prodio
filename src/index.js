@@ -161,6 +161,9 @@ function paymentServices(BASE_URL) {
         case "GET_TRANSACTION_GRAPH":
           return funGetTransactionGraph(BASE_URL,payload,callback);
         break;
+        case "GET_PROJECT_PAYERS_LISTING":
+          return funGetProjectPayersListing(BASE_URL,payload,callback);
+        break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -924,5 +927,33 @@ const funGetTransactionGraph = function (BASE_URL,payload,callback) {
   });
 }
 
+
+
+
+const funGetProjectPayersListing = function (BASE_URL,payload,callback) {
+
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchantId is mandatory.', { expose: false }));
+  }
+
+  let projectId = payload["meta"]["projectId"];
+  if (isNull(projectId)) {
+    return callback(new HttpErrors.BadRequest('projectId is mandatory.', { expose: false }));
+  }
+
+  let pageNo = "";
+  if (!isNull(payload["meta"]["pageNo"])) {
+    pageNo = payload["meta"]["pageNo"];
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/getPayersListOfProject?merchantId=${merchantId}&projectId=${projectId}&pageNo=${pageNo}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
 
 module.exports = paymentServices;
