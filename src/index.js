@@ -164,6 +164,9 @@ function paymentServices(BASE_URL) {
         case "GET_PROJECT_PAYERS_LISTING":
           return funGetProjectPayersListing(BASE_URL,payload,callback);
         break;
+        case "ACH_PAYMENT":
+          return funMakeACHPayment(BASE_URL,payload,callback);
+        break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -928,6 +931,17 @@ const funGetTransactionGraph = function (BASE_URL,payload,callback) {
 }
 
 
+const funMakeACHPayment = function (BASE_URL,payload,callback) {
+
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/processACHPayment`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
 
 
 const funGetProjectPayersListing = function (BASE_URL,payload,callback) {
