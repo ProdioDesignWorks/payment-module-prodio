@@ -23,7 +23,10 @@ exports.TOKEN_TYPES = [
      IOS_TYPE_TOKEN,
      WEB_TYPE_TOKEN,
 ];
-
+exports.PAYMENT_URL = {
+    "CREATE_ORDER":"ezpayPaymentTransactions/createOrder",
+    "GET_ORDER_PROFILE":"ezpayPaymentTransactions/getOrderProfile"
+}
 exports.PAYMENT_TERMS = {
 	"PAID": "PAID",
 	"FAILED": "FAILED",

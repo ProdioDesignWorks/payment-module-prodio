@@ -3,13 +3,13 @@
  * 
  * This code will take the user action and based on the user action and payload it will call the respective payment service.
  *  
- */ 
+ */
 // eslint-disable-next-line import/prefer-default-export
 const axios = require('axios');
-const {parse, stringify} = require('flatted/cjs');
+const { parse, stringify } = require('flatted/cjs');
 //const BASE_URL = `https://5m4hb8aet1.execute-api.us-west-2.amazonaws.com/prod/`;
 const HttpErrors = require('http-errors');
-
+import constant from './config/constant';
 const isNull = function (val) {
   if (typeof val === 'string') { val = val.trim(); }
   if (val === undefined || val === null || typeof val === 'undefined' || val === '' || val === 'undefined') {
@@ -31,148 +31,154 @@ const isJson = function (str) {
 }
 
 function paymentServices(BASE_URL) {
-  this.execute = function (payload,callback) {
+  this.execute = function (payload, callback) {
     // action key calls api.
-    if(payload.action){
-      switch(payload.action){
+    if (payload.action) {
+      switch (payload.action) {
         case "CREATE_MERCHANT":
-          return funCreateMerchant(BASE_URL,payload,callback);
-        break;
+          return funCreateMerchant(BASE_URL, payload, callback);
+          break;
         case "GET_MERCHANT_ID":
-          return funGetMerchantId(BASE_URL,payload,callback);
-        break;
+          return funGetMerchantId(BASE_URL, payload, callback);
+          break;
         case "GET_MERCHANT_STATUS":
-          return funMerchantActionvationStatus(BASE_URL,payload,callback);
-        break;
+          return funMerchantActionvationStatus(BASE_URL, payload, callback);
+          break;
         case "GET_MERCHANT_PROFILE":
-          return funMerchantProfile(BASE_URL,payload,callback);
-        break;
+          return funMerchantProfile(BASE_URL, payload, callback);
+          break;
         case "UPDATE_MERCHANT_PROFILE":
-          return funUpdateMerchantProfile(BASE_URL,payload,callback);
-        break;
+          return funUpdateMerchantProfile(BASE_URL, payload, callback);
+          break;
         case "DEACTIVATE_MERCHANT":
-          return funDeactivateAccount(BASE_URL,payload,callback);
-        break;
+          return funDeactivateAccount(BASE_URL, payload, callback);
+          break;
         case "CREATE_PAYER":
-          return funCreatePayer(BASE_URL,payload,callback);
-        break;
+          return funCreatePayer(BASE_URL, payload, callback);
+          break;
         case "IMPORT_PAYERS":
-          return funImportPayers(BASE_URL,payload,callback);
-        break;
+          return funImportPayers(BASE_URL, payload, callback);
+          break;
         case "GET_PAYERS_LISTING":
-          return funGetPayersListing(BASE_URL,payload,callback);
-        break;
+          return funGetPayersListing(BASE_URL, payload, callback);
+          break;
         case "GET_PAYER_PROFILE":
-          return funGetPayerProfile(BASE_URL,payload,callback);
-        break;
+          return funGetPayerProfile(BASE_URL, payload, callback);
+          break;
         case "CREATE_TRANSACTION":
-          return funCreateTransaction(BASE_URL,payload,callback);
-        break;
+          return funCreateTransaction(BASE_URL, payload, callback);
+          break;
         case "SAVE_CARD":
-          return funSaveCard(BASE_URL,payload,callback);
-        break;
+          return funSaveCard(BASE_URL, payload, callback);
+          break;
         case "REMOVE_CARD":
-          return funRemoveCard(BASE_URL,payload,callback);
-        break;
+          return funRemoveCard(BASE_URL, payload, callback);
+          break;
         case "GET_SAVED_CARDS":
-          return funSavedCardsListing(BASE_URL,payload,callback);
-        break;
+          return funSavedCardsListing(BASE_URL, payload, callback);
+          break;
         case "EDIT_PAYER":
-          return funEditPayer(BASE_URL,payload,callback);
-        break;
+          return funEditPayer(BASE_URL, payload, callback);
+          break;
         case "REMOVE_PAYER":
-          return funRemovePayer(BASE_URL,payload,callback);
-        break;
+          return funRemovePayer(BASE_URL, payload, callback);
+          break;
         case "PROCESS_PAYMENT":
-          return funProcessPayment(BASE_URL,payload,callback);
-        break;
+          return funProcessPayment(BASE_URL, payload, callback);
+          break;
         case "DIRECT_PAYMENT":
-          return funDirectPayment(BASE_URL,payload,callback);
-        break;
+          return funDirectPayment(BASE_URL, payload, callback);
+          break;
         case "GET_TRANSACTIONS_LISTING":
-          return funGetTransactionsListing(BASE_URL,payload,callback);
-        break;
+          return funGetTransactionsListing(BASE_URL, payload, callback);
+          break;
         case "GET_TRANSACTION_DETAILS":
-          return funGetTransactionDetails(BASE_URL,payload,callback);
-        break;
+          return funGetTransactionDetails(BASE_URL, payload, callback);
+          break;
         case "GET_NON_PAYERS_LISTING":
-          return funGetNonPayersListing(BASE_URL,payload,callback);
-        break;
+          return funGetNonPayersListing(BASE_URL, payload, callback);
+          break;
         case "GET_REVENUE_PER_PAYER":
-          return funGetRevenuePerPayer(BASE_URL,payload,callback);
-        break;
+          return funGetRevenuePerPayer(BASE_URL, payload, callback);
+          break;
         case "GET_TRANSACTION_STATS":
-          return funGetTransactionStats(BASE_URL,payload,callback);
-        break;
+          return funGetTransactionStats(BASE_URL, payload, callback);
+          break;
         case "GET_PROJECT_TRANSACTION_STATS":
-          return funGetProjectTransactionStats(BASE_URL,payload,callback);
-        break;
+          return funGetProjectTransactionStats(BASE_URL, payload, callback);
+          break;
         case "GET_PAYER_TRANSACTION_STATS":
-          return funGetPayerTransactionStats(BASE_URL,payload,callback);
-        break;
+          return funGetPayerTransactionStats(BASE_URL, payload, callback);
+          break;
         case "GET_PAYERS_TRANSACTION":
-          return funGetPayersTransactions(BASE_URL,payload,callback);
-        break;
+          return funGetPayersTransactions(BASE_URL, payload, callback);
+          break;
         case "GET_ALL_MERCHANTS":
-          return funGetAllMerchants(BASE_URL,payload,callback);
-        break;
+          return funGetAllMerchants(BASE_URL, payload, callback);
+          break;
         case "ATTACH_PAYER_MERCHANT":
-          return funAttachPayerWithMerchant(BASE_URL,payload,callback);
-        break;
+          return funAttachPayerWithMerchant(BASE_URL, payload, callback);
+          break;
         case "GET_MERCHANTS_OF_PAYER":
-          return funGetMerchantsForPayer(BASE_URL,payload,callback);
-        break;
+          return funGetMerchantsForPayer(BASE_URL, payload, callback);
+          break;
         case "MAKE_REFUND":
-          return funMakeRefund(BASE_URL,payload,callback);
-        break;
+          return funMakeRefund(BASE_URL, payload, callback);
+          break;
         case "VERIFY_CARD":
-          return funVerifyCardOE(BASE_URL,payload,callback);
-        break;
+          return funVerifyCardOE(BASE_URL, payload, callback);
+          break;
         case "GET_ORDER_DETAILS":
-          return funGetOrderDetails(BASE_URL,payload,callback);
-        break;
+          return funGetOrderDetails(BASE_URL, payload, callback);
+          break;
         case "PAY_WITH_SAVED_CARD":
-          return funPayWithSavedCard(BASE_URL,payload,callback);
-        break;
+          return funPayWithSavedCard(BASE_URL, payload, callback);
+          break;
         case "ADD_INSTALLMENT":
-          return funAddInstallment(BASE_URL,payload,callback);
-        break;
+          return funAddInstallment(BASE_URL, payload, callback);
+          break;
         case "EDIT_INSTALLMENT":
-          return funEditInstallment(BASE_URL,payload,callback);
-        break;
+          return funEditInstallment(BASE_URL, payload, callback);
+          break;
         case "EDIT_MULTIPLE_INSTALLMENTS":
-          return funEditMultipleInstallment(BASE_URL,payload,callback);
-        break;
+          return funEditMultipleInstallment(BASE_URL, payload, callback);
+          break;
         case "REMOVE_INSTALLMENT":
-          return funRemoveInstallment(BASE_URL,payload,callback);
-        break;
+          return funRemoveInstallment(BASE_URL, payload, callback);
+          break;
         case "ENABLE_INSTALLMENTS":
-          return funEnableInstallments(BASE_URL,payload,callback);
-        break;
+          return funEnableInstallments(BASE_URL, payload, callback);
+          break;
         case "DISABLE_INSTALLMENTS":
-          return funDisableInstallments(BASE_URL,payload,callback);
-        break;
+          return funDisableInstallments(BASE_URL, payload, callback);
+          break;
         case "UPDATE_TRANSACTION_STATUS":
-          return funUpdateTransactionStatus(BASE_URL,payload,callback);
-        break;
+          return funUpdateTransactionStatus(BASE_URL, payload, callback);
+          break;
         case "GET_REVENUE_GRAPH":
-          return funGetRevenueGraph(BASE_URL,payload,callback);
-        break;
+          return funGetRevenueGraph(BASE_URL, payload, callback);
+          break;
         case "GET_TRANSACTION_GRAPH":
-          return funGetTransactionGraph(BASE_URL,payload,callback);
-        break;
+          return funGetTransactionGraph(BASE_URL, payload, callback);
+          break;
         case "GET_PROJECT_PAYERS_LISTING":
-          return funGetProjectPayersListing(BASE_URL,payload,callback);
-        break;
+          return funGetProjectPayersListing(BASE_URL, payload, callback);
+          break;
         case "ACH_PAYMENT":
-          return funMakeACHPayment(BASE_URL,payload,callback);
-        break;
+          return funMakeACHPayment(BASE_URL, payload, callback);
+          break;
+        case "CREATE_ORDER":
+          return funCreateOrder(BASE_URL, payload, callback);
+          break;
+        case "GET_ORDER_PROFILE":
+          return funGetOrderProfile(BASE_URL, payload, callback);
+          break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
-        break;
+          break;
       }
-    }else{
+    } else {
       return "Please provide valid action";
     }
 
@@ -185,7 +191,7 @@ function paymentServices(BASE_URL) {
 * @param payload - the required payload JSON to perform the operations.
 * @param callback - to send the response back to the requester.
 */
-const funCreateMerchant = function (BASE_URL,payload,callback) {
+const funCreateMerchant = function (BASE_URL, payload, callback) {
   let userId = payload["meta"]["userId"];
   if (isNull(userId)) {
     return callback(new HttpErrors.BadRequest('User Id is mandatory.', { expose: false }));
@@ -196,23 +202,23 @@ const funCreateMerchant = function (BASE_URL,payload,callback) {
     console.log(response)
     return callback(response);
   })
-  .catch((error) => {
-    let json = stringify(error);
-    return callback(json);
-  });
+    .catch((error) => {
+      let json = stringify(error);
+      return callback(json);
+    });
 }
 
-const funGetAllMerchants = function (BASE_URL,payload,callback) {
+const funGetAllMerchants = function (BASE_URL, payload, callback) {
 
   let url = `${BASE_URL}ezpayMerchants/getAllActiveMerchants`;
   axios.get(url).then(response => {
     console.log(response)
     return callback(response);
   })
-  .catch((error) => {
-    let json = stringify(error);
-    return callback(json);
-  });
+    .catch((error) => {
+      let json = stringify(error);
+      return callback(json);
+    });
 }
 
 /**
@@ -221,7 +227,7 @@ const funGetAllMerchants = function (BASE_URL,payload,callback) {
 * @param callback - to send the response back to the requester.
 */
 
-const funMerchantActionvationStatus = function (BASE_URL,payload,callback) {
+const funMerchantActionvationStatus = function (BASE_URL, payload, callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -236,7 +242,7 @@ const funMerchantActionvationStatus = function (BASE_URL,payload,callback) {
 }
 
 
-const funGetMerchantId = function (BASE_URL,payload,callback) {
+const funGetMerchantId = function (BASE_URL, payload, callback) {
   let userId = payload["meta"]["userId"];
   if (isNull(userId)) {
     return callback(new HttpErrors.BadRequest('user Id is mandatory.', { expose: false }));
@@ -250,7 +256,7 @@ const funGetMerchantId = function (BASE_URL,payload,callback) {
   });
 }
 
-const funMerchantProfile = function (BASE_URL,payload,callback) {
+const funMerchantProfile = function (BASE_URL, payload, callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -265,7 +271,7 @@ const funMerchantProfile = function (BASE_URL,payload,callback) {
 }
 
 
-const funUpdateMerchantProfile = function (BASE_URL,payload,callback) {
+const funUpdateMerchantProfile = function (BASE_URL, payload, callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -279,7 +285,7 @@ const funUpdateMerchantProfile = function (BASE_URL,payload,callback) {
   });
 }
 
-const funDeactivateAccount = function (BASE_URL,payload,callback) {
+const funDeactivateAccount = function (BASE_URL, payload, callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -294,7 +300,7 @@ const funDeactivateAccount = function (BASE_URL,payload,callback) {
 }
 
 
-const funCreatePayer = function (BASE_URL,payload,callback) {
+const funCreatePayer = function (BASE_URL, payload, callback) {
   let merchantId = "";
 
   if (!isNull(payload["meta"]["merchantId"])) {
@@ -310,7 +316,7 @@ const funCreatePayer = function (BASE_URL,payload,callback) {
   });
 }
 
-const funEditPayer = function (BASE_URL,payload,callback) {
+const funEditPayer = function (BASE_URL, payload, callback) {
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
@@ -324,7 +330,7 @@ const funEditPayer = function (BASE_URL,payload,callback) {
   });
 }
 
-const funRemovePayer = function (BASE_URL,payload,callback) {
+const funRemovePayer = function (BASE_URL, payload, callback) {
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
@@ -339,7 +345,7 @@ const funRemovePayer = function (BASE_URL,payload,callback) {
 }
 
 
-const funImportPayers = function (BASE_URL,payload,callback) {
+const funImportPayers = function (BASE_URL, payload, callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -354,7 +360,7 @@ const funImportPayers = function (BASE_URL,payload,callback) {
 }
 
 
-const funGetPayersListing = function (BASE_URL,payload,callback) {
+const funGetPayersListing = function (BASE_URL, payload, callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -369,7 +375,7 @@ const funGetPayersListing = function (BASE_URL,payload,callback) {
 }
 
 
-const funGetPayerProfile = function (BASE_URL,payload,callback) {
+const funGetPayerProfile = function (BASE_URL, payload, callback) {
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
@@ -384,7 +390,7 @@ const funGetPayerProfile = function (BASE_URL,payload,callback) {
 }
 
 
-const funCreateTransaction = function (BASE_URL,payload,callback) {
+const funCreateTransaction = function (BASE_URL, payload, callback) {
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -393,7 +399,7 @@ const funCreateTransaction = function (BASE_URL,payload,callback) {
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/requestPayment?merchantId=${merchantId}&payerId=${payerId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -403,13 +409,13 @@ const funCreateTransaction = function (BASE_URL,payload,callback) {
   });
 }
 
-const funSaveCard = function (BASE_URL,payload,callback) {
-  
+const funSaveCard = function (BASE_URL, payload, callback) {
+
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPayees/addCardForPayee?payerId=${payerId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -419,8 +425,8 @@ const funSaveCard = function (BASE_URL,payload,callback) {
   });
 }
 
-const funRemoveCard = function (BASE_URL,payload,callback) {
-  
+const funRemoveCard = function (BASE_URL, payload, callback) {
+
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
@@ -430,7 +436,7 @@ const funRemoveCard = function (BASE_URL,payload,callback) {
   if (isNull(cardId)) {
     return callback(new HttpErrors.BadRequest('card Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPayees/removeCard?payerId=${payerId}&cardId=${cardId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -440,13 +446,13 @@ const funRemoveCard = function (BASE_URL,payload,callback) {
   });
 }
 
-const funSavedCardsListing = function (BASE_URL,payload,callback) {
-  
+const funSavedCardsListing = function (BASE_URL, payload, callback) {
+
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPayees/getSavedCards?payerId=${payerId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -456,8 +462,8 @@ const funSavedCardsListing = function (BASE_URL,payload,callback) {
   });
 }
 
-const funGetTransactionsListing = function (BASE_URL,payload,callback) {
-  
+const funGetTransactionsListing = function (BASE_URL, payload, callback) {
+
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -466,7 +472,7 @@ const funGetTransactionsListing = function (BASE_URL,payload,callback) {
   if (!isNull(payload["meta"]["pageNo"])) {
     pageNo = payload["meta"]["pageNo"];
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionsListing?merchantId=${merchantId}&pageNo=${pageNo}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -476,8 +482,8 @@ const funGetTransactionsListing = function (BASE_URL,payload,callback) {
   });
 }
 
-const funProcessPayment = function (BASE_URL,payload,callback) {
-  
+const funProcessPayment = function (BASE_URL, payload, callback) {
+
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
@@ -497,7 +503,7 @@ const funProcessPayment = function (BASE_URL,payload,callback) {
   if (!isNull(payload["meta"]["cardId"])) {
     cardId = payload["meta"]["cardId"];
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}&hostBaseURL=${hostBaseURL}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -509,9 +515,9 @@ const funProcessPayment = function (BASE_URL,payload,callback) {
 
 
 
-const funDirectPayment = function (BASE_URL,payload,callback) {
+const funDirectPayment = function (BASE_URL, payload, callback) {
   payload["BASE_URL"] = BASE_URL;
-  console.log("payload==>"+JSON.stringify(payload));
+  console.log("payload==>" + JSON.stringify(payload));
   let url = `${BASE_URL}ezpayPaymentTransactions/directPayment`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -522,13 +528,13 @@ const funDirectPayment = function (BASE_URL,payload,callback) {
 }
 
 
-const funGetTransactionDetails = function (BASE_URL,payload,callback) {
-  
+const funGetTransactionDetails = function (BASE_URL, payload, callback) {
+
   let transactionId = payload["meta"]["transactionId"];
   if (isNull(transactionId)) {
     return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionDetails?transactionId=${transactionId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -539,8 +545,8 @@ const funGetTransactionDetails = function (BASE_URL,payload,callback) {
 }
 
 
-const funGetProjectTransactionStats = function (BASE_URL,payload,callback) {
-  
+const funGetProjectTransactionStats = function (BASE_URL, payload, callback) {
+
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -550,7 +556,7 @@ const funGetProjectTransactionStats = function (BASE_URL,payload,callback) {
   if (isNull(projectId)) {
     return callback(new HttpErrors.BadRequest('project Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/getProjectTransactionStats?merchantId=${merchantId}&projectId=${projectId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -560,13 +566,13 @@ const funGetProjectTransactionStats = function (BASE_URL,payload,callback) {
   });
 }
 
-const funGetTransactionStats = function (BASE_URL,payload,callback) {
-  
+const funGetTransactionStats = function (BASE_URL, payload, callback) {
+
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionStats?merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -576,18 +582,18 @@ const funGetTransactionStats = function (BASE_URL,payload,callback) {
   });
 }
 
-const funGetPayerTransactionStats = function (BASE_URL,payload,callback) {
-  
+const funGetPayerTransactionStats = function (BASE_URL, payload, callback) {
+
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
 
   let merchantId = "";
-  if(typeof payload["meta"]["merchantId"]!=="undefined" &&  typeof payload["meta"]["merchantId"]!==undefined ){
+  if (typeof payload["meta"]["merchantId"] !== "undefined" && typeof payload["meta"]["merchantId"] !== undefined) {
     merchantId = payload["meta"]["merchantId"];
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/getPayerTransactionStats?payerId=${payerId}&merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -597,13 +603,13 @@ const funGetPayerTransactionStats = function (BASE_URL,payload,callback) {
   });
 }
 
-const funGetNonPayersListing = function (BASE_URL,payload,callback) {
-  
+const funGetNonPayersListing = function (BASE_URL, payload, callback) {
+
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/getNonPayersListing?merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -613,13 +619,13 @@ const funGetNonPayersListing = function (BASE_URL,payload,callback) {
   });
 }
 
-const funGetRevenuePerPayer = function (BASE_URL,payload,callback) {
-  
+const funGetRevenuePerPayer = function (BASE_URL, payload, callback) {
+
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/getRevenuePerPayer?merchantId=${merchantId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -630,8 +636,8 @@ const funGetRevenuePerPayer = function (BASE_URL,payload,callback) {
 }
 
 
-const funGetPayersTransactions = function (BASE_URL,payload,callback) {
-  
+const funGetPayersTransactions = function (BASE_URL, payload, callback) {
+
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
@@ -640,7 +646,7 @@ const funGetPayersTransactions = function (BASE_URL,payload,callback) {
   if (!isNull(payload["meta"]["pageNo"])) {
     pageNo = payload["meta"]["pageNo"];
   }
-  
+
   let url = `${BASE_URL}ezpayPaymentTransactions/getPayersTransactions?payerId=${payerId}&pageNo=${pageNo}`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -650,8 +656,8 @@ const funGetPayersTransactions = function (BASE_URL,payload,callback) {
   });
 }
 
-const funAttachPayerWithMerchant = function (BASE_URL,payload,callback) {
-  
+const funAttachPayerWithMerchant = function (BASE_URL, payload, callback) {
+
   let url = `${BASE_URL}ezpayMerchants/attachPayerWithMerchants`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -661,8 +667,8 @@ const funAttachPayerWithMerchant = function (BASE_URL,payload,callback) {
   });
 }
 
-const funGetMerchantsForPayer = function (BASE_URL,payload,callback) {
-  
+const funGetMerchantsForPayer = function (BASE_URL, payload, callback) {
+
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
@@ -679,7 +685,7 @@ const funGetMerchantsForPayer = function (BASE_URL,payload,callback) {
 
 
 
-const funMakeRefund = function (BASE_URL,payload,callback) {
+const funMakeRefund = function (BASE_URL, payload, callback) {
 
   let url = `${BASE_URL}ezpayPaymentTransactions/makeRefund`;
   axios.post(url, payload).then(response => {
@@ -690,7 +696,7 @@ const funMakeRefund = function (BASE_URL,payload,callback) {
   });
 }
 
-const funVerifyCardOE = function (BASE_URL,payload,callback) {
+const funVerifyCardOE = function (BASE_URL, payload, callback) {
 
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
@@ -711,7 +717,7 @@ const funVerifyCardOE = function (BASE_URL,payload,callback) {
   });
 }
 
-const funGetOrderDetails = function (BASE_URL,payload,callback) {
+const funGetOrderDetails = function (BASE_URL, payload, callback) {
 
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getOrderDetails`;
@@ -724,7 +730,7 @@ const funGetOrderDetails = function (BASE_URL,payload,callback) {
 }
 
 
-const funPayWithSavedCard = function (BASE_URL,payload,callback) {
+const funPayWithSavedCard = function (BASE_URL, payload, callback) {
 
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
@@ -756,7 +762,7 @@ const funPayWithSavedCard = function (BASE_URL,payload,callback) {
 }
 
 
-const funAddInstallment = function (BASE_URL,payload,callback) {
+const funAddInstallment = function (BASE_URL, payload, callback) {
 
   let transactionId = payload["meta"]["transactionId"];
   if (isNull(transactionId)) {
@@ -777,7 +783,7 @@ const funAddInstallment = function (BASE_URL,payload,callback) {
   });
 }
 
-const funEditInstallment = function (BASE_URL,payload,callback) {
+const funEditInstallment = function (BASE_URL, payload, callback) {
 
   let installmentId = payload["meta"]["installmentId"];
   if (isNull(installmentId)) {
@@ -794,7 +800,7 @@ const funEditInstallment = function (BASE_URL,payload,callback) {
 }
 
 
-const funEnableInstallments = function (BASE_URL,payload,callback) {
+const funEnableInstallments = function (BASE_URL, payload, callback) {
 
   let transactionId = payload["meta"]["transactionId"];
   if (isNull(transactionId)) {
@@ -811,7 +817,7 @@ const funEnableInstallments = function (BASE_URL,payload,callback) {
 }
 
 
-const funDisableInstallments = function (BASE_URL,payload,callback) {
+const funDisableInstallments = function (BASE_URL, payload, callback) {
 
   let transactionId = payload["meta"]["transactionId"];
   if (isNull(transactionId)) {
@@ -830,7 +836,7 @@ const funDisableInstallments = function (BASE_URL,payload,callback) {
 
 
 
-const funEditMultipleInstallment = function (BASE_URL,payload,callback) {
+const funEditMultipleInstallment = function (BASE_URL, payload, callback) {
 
   let transactionId = payload["meta"]["transactionId"];
   if (isNull(transactionId)) {
@@ -848,7 +854,7 @@ const funEditMultipleInstallment = function (BASE_URL,payload,callback) {
 
 
 
-const funRemoveInstallment = function (BASE_URL,payload,callback) {
+const funRemoveInstallment = function (BASE_URL, payload, callback) {
 
   let installmentId = payload["meta"]["installmentId"];
   if (isNull(installmentId)) {
@@ -864,7 +870,7 @@ const funRemoveInstallment = function (BASE_URL,payload,callback) {
   });
 }
 
-const funUpdateTransactionStatus = function (BASE_URL,payload,callback) {
+const funUpdateTransactionStatus = function (BASE_URL, payload, callback) {
 
   let transactionId = payload["meta"]["transactionId"];
   if (isNull(transactionId)) {
@@ -887,7 +893,7 @@ const funUpdateTransactionStatus = function (BASE_URL,payload,callback) {
 
 
 
-const funGetRevenueGraph = function (BASE_URL,payload,callback) {
+const funGetRevenueGraph = function (BASE_URL, payload, callback) {
 
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
@@ -909,7 +915,7 @@ const funGetRevenueGraph = function (BASE_URL,payload,callback) {
 }
 
 
-const funGetTransactionGraph = function (BASE_URL,payload,callback) {
+const funGetTransactionGraph = function (BASE_URL, payload, callback) {
 
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
@@ -931,9 +937,7 @@ const funGetTransactionGraph = function (BASE_URL,payload,callback) {
 }
 
 
-const funMakeACHPayment = function (BASE_URL,payload,callback) {
-
-
+const funMakeACHPayment = function (BASE_URL, payload, callback) {
   let url = `${BASE_URL}ezpayPaymentTransactions/processACHPayment`;
   axios.post(url, payload).then(response => {
     return callback(response);
@@ -941,10 +945,30 @@ const funMakeACHPayment = function (BASE_URL,payload,callback) {
     let json = stringify(error);
     return callback(json);
   });
+};
+
+const funCreateOrder = (BASE_URL, payload, callback) => {
+  let url = `${BASE_URL}${constant.PAYMENT_URL.CREATE_ORDER}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch(error => {
+    let json = stringify(error);
+    return callback(json);
+  })
+}
+
+const funGetOrderProfile = (BASE_URL, payload, callback) => {
+  let url = `${BASE_URL}${constant.PAYMENT_URL.GET_ORDER_PROFILE}`;
+  axios.get(url, payload).then(response => {
+    return callback(response);
+  }).catch(error => {
+    let json = stringify(error);
+    return callback(json);
+  })
 }
 
 
-const funGetProjectPayersListing = function (BASE_URL,payload,callback) {
+const funGetProjectPayersListing = function (BASE_URL, payload, callback) {
 
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
