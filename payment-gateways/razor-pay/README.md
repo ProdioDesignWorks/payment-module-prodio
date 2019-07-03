@@ -2,24 +2,8 @@
 # Features!
 
 * Payment Transaction
-	* Process Payment
-	* Get Payment Status
-	* Get Payment Transactions (filter by mechant, payee, date, keyword etc.)
-
-* Recurring Billing
-	* Add Recurring Transaction
-	* Edit Recurring Transaction
-	* Remove Recurring Transaction
-
-* Invoice
-	* Create Invoice
-	* Send Invoice
-
-* Refund
-	* Process Refund for Transaction
-
-* Reports/Stats
- 
+	* Create Order
+	* Get Order Profile
 
 ### Installation
 
@@ -203,20 +187,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/integrity/remove_payer.json) | Json having merchant details. | YES |
 
 
-
-`10. Create Payment Request Transaction:`
-
- 	This function will be used to request or create payment transaction.	
-
-### Payload
-
-| Key | Type | Value | Description | Required |
-| --- | ---- | ----- | ----------- | -------- |
-| `action` | string | `CREATE_TRANSACTION` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/integrity/create_transaction.json) | Json having merchant details. | YES |
-
-
-`11. Get Payers Listing:`
+`10. Get Payers Listing:`
 
  	This function will provide the listing of active payers for the merchant.	
 
@@ -228,7 +199,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | `meta` | json | [SAMPLE_META_INFO](/sample_json/integrity/get_payers_listing.json) | Json having merchant details. | YES |
 
 
-`12. Get Payer Profile:`
+`11. Get Payer Profile:`
 
  	This function will provide the profile details for the payer account.	
 
@@ -277,31 +248,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 
 
 
-`14. Direct Payment:`
-
- 	This will does the payment transaction without need of saving the payer first.
-
-### Payload
-
-| Key | Type | Value | Description | Required |
-| --- | ---- | ----- | ----------- | -------- |
-| `action` | string | `DIRECT_PAYMENT` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/payu_direct_payment.json) | Json having merchant details. | YES |
-
-
-`15. Make Refund:`
-
- 	This will does the refund part for the transaction.
-
-### Payload
-
-| Key | Type | Value | Description | Required |
-| --- | ---- | ----- | ----------- | -------- |
-| `action` | string | `MAKE_REFUND` | key which defines the type of action to be performed | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/payu/make_refund.json) | Json having merchant details. | YES |
-
-
-`16. Get Project Transaction Stats:`
+`15. Get Project Transaction Stats:`
 
  	This will get the project transaction stats.
 
