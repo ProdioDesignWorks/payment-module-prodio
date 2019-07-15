@@ -948,10 +948,22 @@ const funMakeACHPayment = function (BASE_URL, payload, callback) {
 };
 
 const funCreateOrder = (BASE_URL, payload, callback) => {
-  let url = `${BASE_URL}${constant.PAYMENT_URL.CREATE_ORDER}`;
+    let merchantId = payload["meta"]["merchantId"];
+    if (isNull(merchantId)) {
+      return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+    }
+    let payerId = payload["meta"]["payerId"];
+    if (isNull(payerId)) {
+      return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+    }
+  let url = `${BASE_URL}${constant.PAYMENT_URL.CREATE_ORDER}?merchantId=${merchantId}`;
+  console.log("createOrsder",url);
+  console.log("payload",payload);
   axios.post(url, payload).then(response => {
+    console.log("module response response",response);
     return callback(response);
   }).catch(error => {
+    console.log("error",error);
     let json = stringify(error);
     return callback(json);
   })
