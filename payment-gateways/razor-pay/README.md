@@ -228,7 +228,8 @@ Require the payment-module-prodio module and initialize the payment npm module c
 
 `13.create Order:`
 
- 	 Create an order in Payment Module.
+ 	 Creates an transaction such as one time or recurring based on request payload.
+         
 
 ### Payload
 
