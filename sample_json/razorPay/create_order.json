@@ -3,6 +3,7 @@
     "payerId":"cc15dc54-98e2-45d0-b5ab-113aebf7a1e9", /* (You can get payerId from listing of payers api) */
     "payerName":"",
     "title":"",
+    "type":"link",//if payment link required for accepting payment from payers.
     "currency": "USD || INR",
     "isRecurring": false,
     "invoiceNumber":"",
