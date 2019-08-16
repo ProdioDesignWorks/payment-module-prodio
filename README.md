@@ -26,7 +26,7 @@ This project is started with an aim to reduce implementing and re-architecting c
  * Open http://localhost:3010/explorer/ in your browser
  * If you've pm2 installed then use this pm2 start server/server.js --name="PAYMENT_SERVICE"
  * When you install `payment-module-prodio`, it will ask question for the BASE_URL of this `PAYMENT_SERVICE` - eventually.
- * There is a [config](https://github.com/ProdioDesignWorks/payment-services-prodio/blob/master/services/paymentsources.json) file, which defines all the root credentials for the payment gateways.
+ * There is a [config](https://bitbucket.org/ProdioDesignworks/payment-services-prodio/src/master/services/paymentsources.json) file, which defines all the root credentials for the payment gateways.
  * IMP - You can ONLY Select anyone as `is_active` true. And that payment gateway will be used as default.
  * You will have to manually install the following `npm` modules (as of now) -
  	* `npm install service-adapter-prodio@latest --save`
@@ -34,6 +34,8 @@ This project is started with an aim to reduce implementing and re-architecting c
  	* `npm install payu-connector-prodio@latest --save`
  	* `npm install tsys-connector-prodio@latest --save`
  	* `npm install open-edge-connector-prodio@latest --save`
+	* `npm install razor-pay-connector-prodio@latest --save`
+	
 
 # Note:
 `payment-services-prodio` uses loopback as the core framework for developing API's, so all customisations, configurations, middlewares, events, and db connectors can be used which you would have used in loopback.

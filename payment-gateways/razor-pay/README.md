@@ -7,10 +7,12 @@
 
 ### Installation
 
-$ npm install payment-module-prodio --save
+ 1. npm install payment-module-prodio --save 
+ 2.  npm install razor-pay-react-sdk-prodio --save (https://www.npmjs.com/package/razor-pay-react-sdk-prodio)
 
   
 # Initialization 
+
 Require the payment-module-prodio module and initialize the payment npm module client.
 ```JSX
 
@@ -226,16 +228,17 @@ Require the payment-module-prodio module and initialize the payment npm module c
 
 `13.create Order:`
 
- 	 Create an order in Payment Module.
+ 	 Creates an transaction such as one time or recurring based on request payload.
+         
 
 ### Payload
 
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `CREATE_ORDER` | Create an order in Payment Module | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/razorPay/payu_process_payment.json) | Json having merchant details. | YES |
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/razorPay/create_order.json) | Json having merchant details. | YES |
 
-`14.get Order Profile:`
+`14.get Transaction Profile:`
 
  	This will does the payment transaction.
 
@@ -244,8 +247,7 @@ Require the payment-module-prodio module and initialize the payment npm module c
 | Key | Type | Value | Description | Required |
 | --- | ---- | ----- | ----------- | -------- |
 | `action` | string | `GET_ORDER_PROFILE` | Fetches a particular order | YES |
-| `meta` | json | [SAMPLE_META_INFO](/sample_json/razorPay/payu_process_payment.json) | Json having merchant details. | YES |
-
+| `meta` | json | [SAMPLE_META_INFO](/sample_json/razorPay/transaction_profile.json) | Json having transaction  details. | YES |
 
 
 `15. Get Project Transaction Stats:`
