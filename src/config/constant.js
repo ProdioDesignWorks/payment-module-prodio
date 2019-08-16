@@ -25,7 +25,8 @@ exports.TOKEN_TYPES = [
 ];
 exports.PAYMENT_URL = {
     "CREATE_ORDER":"ezpayPaymentTransactions/createOrder",
-    "GET_ORDER_PROFILE":"ezpayPaymentTransactions/getOrderProfile"
+    "GET_ORDER_PROFILE":"ezpayPaymentTransactions/getOrderProfile",
+    "CREATE_FUND_TRANSFER":"ezpayPaymentTransactions/createTransfer"
 }
 exports.PAYMENT_TERMS = {
 	"PAID": "PAID",
