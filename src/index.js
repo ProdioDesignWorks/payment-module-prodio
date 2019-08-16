@@ -173,6 +173,9 @@ function paymentServices(BASE_URL) {
         case "GET_ORDER_PROFILE":
           return funGetOrderProfile(BASE_URL, payload, callback);
           break;
+        case "CREATE_TRANSFER":
+          return funCreateTransfer(BASE_URL, payload, callback);
+          break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -918,16 +921,17 @@ const funGetRevenueGraph = function (BASE_URL, payload, callback) {
 const funGetTransactionGraph = function (BASE_URL, payload, callback) {
 
   let merchantId = payload["meta"]["merchantId"];
+  let url = '';
+  let year = '';
   if (isNull(merchantId)) {
-    return callback(new HttpErrors.BadRequest('merchantId is mandatory.', { expose: false }));
+     url = `${BASE_URL}ezpayPaymentTransactions/getTransactionGraphData?year=${year}`;
   }
-
-  let year = "";
+  else {
+    url = `${BASE_URL}ezpayPaymentTransactions/getTransactionGraphData?merchantId=${merchantId}&year=${year}`;
+  }
   if (!isNull(payload["meta"]["year"])) {
     year = payload["meta"]["year"];
   }
-
-  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionGraphData?merchantId=${merchantId}&year=${year}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -979,7 +983,21 @@ const funGetOrderProfile = (BASE_URL, payload, callback) => {
   })
 }
 
+const funCreateTransfer = (BASE_URL,payload,callback)=>{
+  let merchantId = payload["meta"]["merchantId"];
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchantId is mandatory.', { expose: false }));
+  }
 
+  let url = `${BASE_URL}${constant.PAYMENT_URL.CREATE_FUND_TRANSFER}?merchantId=${merchantId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+
+}
 const funGetProjectPayersListing = function (BASE_URL, payload, callback) {
 
   let merchantId = payload["meta"]["merchantId"];
