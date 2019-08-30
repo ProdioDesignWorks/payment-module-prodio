@@ -176,6 +176,8 @@ function paymentServices(BASE_URL) {
         case "CREATE_TRANSFER":
           return funCreateTransfer(BASE_URL, payload, callback);
           break;
+        case "SEARCH_TRANSACTION_FILTER":
+          return funSearchTransactionsByFilter(BASE_URL, payload, callback);
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -477,6 +479,31 @@ const funGetTransactionsListing = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionsListing?merchantId=${merchantId}&pageNo=${pageNo}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
+  let {
+    pageNo,
+    merchantId,
+    startDate,
+    endDate,
+    orderId,
+    transactionType
+  } = payload.meta;
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  if(isNull(pageNo)){
+       pageNo = 0;
+  }
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter
+             ?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
