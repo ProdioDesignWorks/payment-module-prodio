@@ -95,6 +95,9 @@ function paymentServices(BASE_URL) {
         case "GET_TRANSACTION_DETAILS":
           return funGetTransactionDetails(BASE_URL, payload, callback);
           break;
+        case "GET_TRANSACTION_INSTALLMENTS":
+          return funGetTransactionInstallments(BASE_URL, payload, callback);
+          break;  
         case "GET_NON_PAYERS_LISTING":
           return funGetNonPayersListing(BASE_URL, payload, callback);
           break;
@@ -176,6 +179,8 @@ function paymentServices(BASE_URL) {
         case "CREATE_TRANSFER":
           return funCreateTransfer(BASE_URL, payload, callback);
           break;
+        case "SEARCH_TRANSACTION_FILTER":
+          return funSearchTransactionsByFilter(BASE_URL, payload, callback);
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -485,6 +490,31 @@ const funGetTransactionsListing = function (BASE_URL, payload, callback) {
   });
 }
 
+const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
+  let {
+    pageNo,
+    merchantId,
+    startDate,
+    endDate,
+    orderId,
+    transactionType
+  } = payload.meta;
+  if (isNull(merchantId)) {
+    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+  }
+  if(isNull(pageNo)){
+       pageNo = 0;
+  }
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter
+             ?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
 const funProcessPayment = function (BASE_URL, payload, callback) {
 
   let payerId = payload["meta"]["payerId"];
@@ -547,6 +577,22 @@ const funGetTransactionDetails = function (BASE_URL, payload, callback) {
   });
 }
 
+
+const funGetTransactionInstallments = function (BASE_URL, payload, callback) {
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionInstallments?transactionId=${transactionId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
 
 const funGetProjectTransactionStats = function (BASE_URL, payload, callback) {
 
