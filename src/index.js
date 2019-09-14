@@ -95,6 +95,9 @@ function paymentServices(BASE_URL) {
         case "GET_TRANSACTION_DETAILS":
           return funGetTransactionDetails(BASE_URL, payload, callback);
           break;
+        case "GET_TRANSACTION_INSTALLMENTS":
+          return funGetTransactionInstallments(BASE_URL, payload, callback);
+          break;  
         case "GET_NON_PAYERS_LISTING":
           return funGetNonPayersListing(BASE_URL, payload, callback);
           break;
@@ -574,6 +577,22 @@ const funGetTransactionDetails = function (BASE_URL, payload, callback) {
   });
 }
 
+
+const funGetTransactionInstallments = function (BASE_URL, payload, callback) {
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionInstallments?transactionId=${transactionId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
 
 const funGetProjectTransactionStats = function (BASE_URL, payload, callback) {
 
