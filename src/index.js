@@ -508,8 +508,7 @@ const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
   if(isNull(pageNo)){
        pageNo = 0;
   }
-  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter
-             ?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
