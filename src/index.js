@@ -155,6 +155,9 @@ function paymentServices(BASE_URL) {
         case "DISABLE_INSTALLMENTS":
           return funDisableInstallments(BASE_URL, payload, callback);
           break;
+        case "PROCESS_INSTALLMENT_PAYMENT":
+          return funProcessInstallmentPayment(BASE_URL, payload, callback);
+          break;
         case "UPDATE_TRANSACTION_STATUS":
           return funUpdateTransactionStatus(BASE_URL, payload, callback);
           break;
@@ -505,8 +508,7 @@ const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
   if(isNull(pageNo)){
        pageNo = 0;
   }
-  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter
-             ?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -882,9 +884,6 @@ const funDisableInstallments = function (BASE_URL, payload, callback) {
   });
 }
 
-
-
-
 const funEditMultipleInstallment = function (BASE_URL, payload, callback) {
 
   let transactionId = payload["meta"]["transactionId"];
@@ -911,6 +910,37 @@ const funRemoveInstallment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}PaymentInstallments/removeInstallment`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funProcessInstallmentPayment = function (BASE_URL, payload, callback) {
+
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
+  }
+
+  let installmentId = payload["meta"]["installmentId"];
+  if (isNull(installmentId)) {
+    return callback(new HttpErrors.BadRequest('installment Id is mandatory.', { expose: false }));
+  }
+
+  let hostBaseURL = payload["meta"]["hostBaseURL"];
+  if (isNull(hostBaseURL)) {
+    return callback(new HttpErrors.BadRequest('hostBaseURL Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/processInstallmentPayment?payerId=${payerId}&transactionId=${transactionId}&installmentId=${installmentId}&hostBaseURL=${hostBaseURL}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
