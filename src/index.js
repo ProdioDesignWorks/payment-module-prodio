@@ -158,6 +158,9 @@ function paymentServices(BASE_URL) {
         case "PROCESS_INSTALLMENT_PAYMENT":
           return funProcessInstallmentPayment(BASE_URL, payload, callback);
           break;
+        case "INSTALLMENT_ACH_PAYMENT":
+          return funInstallmentACHPayment(BASE_URL, payload, callback);
+          break;  
         case "UPDATE_TRANSACTION_STATUS":
           return funUpdateTransactionStatus(BASE_URL, payload, callback);
           break;
@@ -500,6 +503,7 @@ const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
     startDate,
     endDate,
     orderId,
+    invoiceId,
     transactionType
   } = payload.meta;
   if (isNull(merchantId)) {
@@ -508,7 +512,7 @@ const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
   if(isNull(pageNo)){
        pageNo = 0;
   }
-  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}&invoiceId=${invoiceId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -948,6 +952,16 @@ const funProcessInstallmentPayment = function (BASE_URL, payload, callback) {
     return callback(json);
   });
 }
+
+const funInstallmentACHPayment = function (BASE_URL, payload, callback) {
+  let url = `${BASE_URL}ezpayPaymentTransactions/installmentACHPayment`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+};
 
 const funUpdateTransactionStatus = function (BASE_URL, payload, callback) {
 
