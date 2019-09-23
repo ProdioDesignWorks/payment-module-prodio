@@ -86,6 +86,9 @@ function paymentServices(BASE_URL) {
         case "PROCESS_PAYMENT":
           return funProcessPayment(BASE_URL, payload, callback);
           break;
+        case "PROCESS_DIRECT_PAYMENT":
+          return funProcessDirectPayment(BASE_URL, payload, callback);
+          break;  
         case "DIRECT_PAYMENT":
           return funDirectPayment(BASE_URL, payload, callback);
           break;
@@ -544,6 +547,37 @@ const funProcessPayment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}&hostBaseURL=${hostBaseURL}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funProcessDirectPayment = function (BASE_URL, payload, callback) {
+
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
+  }
+
+  let hostBaseURL = payload["meta"]["hostBaseURL"];
+  if (isNull(hostBaseURL)) {
+    return callback(new HttpErrors.BadRequest('hostBaseURL Id is mandatory.', { expose: false }));
+  }
+
+  let cardId = "";
+  if (!isNull(payload["meta"]["cardId"])) {
+    cardId = payload["meta"]["cardId"];
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/processDirectPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}&hostBaseURL=${hostBaseURL}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
