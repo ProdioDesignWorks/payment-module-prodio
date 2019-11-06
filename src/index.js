@@ -167,6 +167,9 @@ function paymentServices(BASE_URL) {
         case "UPDATE_TRANSACTION_STATUS":
           return funUpdateTransactionStatus(BASE_URL, payload, callback);
           break;
+        case "UPDATE_TRANSACTION_OPENDENTAL_STATUS":
+          return funUpdateTransactionOpenDentalStatus(BASE_URL, payload, callback);
+          break;  
         case "GET_REVENUE_GRAPH":
           return funGetRevenueGraph(BASE_URL, payload, callback);
           break;
@@ -1018,6 +1021,26 @@ const funUpdateTransactionStatus = function (BASE_URL, payload, callback) {
   });
 }
 
+const funUpdateTransactionOpenDentalStatus = function (BASE_URL, payload, callback) {
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transactionId is mandatory.', { expose: false }));
+  }
+
+  let transactionStatus = payload["meta"]["processStatus"];
+  if (isNull(transactionStatus)) {
+    return callback(new HttpErrors.BadRequest('processStatus is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/setOpenDentalStatus?transactionId=${transactionId}&processStatus=${processStatus}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
 
 
 const funGetRevenueGraph = function (BASE_URL, payload, callback) {
