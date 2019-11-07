@@ -1028,8 +1028,8 @@ const funUpdateTransactionOpenDentalStatus = function (BASE_URL, payload, callba
     return callback(new HttpErrors.BadRequest('transactionId is mandatory.', { expose: false }));
   }
 
-  let transactionStatus = payload["meta"]["processStatus"];
-  if (isNull(transactionStatus)) {
+  let processStatus = payload["meta"]["processStatus"];
+  if (isNull(processStatus)) {
     return callback(new HttpErrors.BadRequest('processStatus is mandatory.', { expose: false }));
   }
 
