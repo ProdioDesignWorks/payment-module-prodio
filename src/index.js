@@ -1121,8 +1121,17 @@ const funCreateOrder = (BASE_URL, payload, callback) => {
 }
 
 const funGetOrderProfile = (BASE_URL, payload, callback) => {
+  let orderId = "";
+  if (!isNull(payload["meta"])) {
+    if (!isNull(payload["meta"]["orderId"])) {
+      orderId = payload["meta"]["orderId"];
+    }
+  }
+
   let url = `${BASE_URL}${constant.PAYMENT_URL.GET_ORDER_PROFILE}`;
-  axios.get(url, payload).then(response => {
+  url = url+"?orderId="+orderId;
+
+  axios.post(url, payload).then(response => {
     return callback(response);
   }).catch(error => {
     let json = stringify(error);
