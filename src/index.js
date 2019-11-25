@@ -831,7 +831,7 @@ const funPayWithSavedCard = function (BASE_URL, payload, callback) {
 
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
-    return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
+    //return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
 
   let cardId = payload["meta"]["cardId"];
@@ -841,7 +841,7 @@ const funPayWithSavedCard = function (BASE_URL, payload, callback) {
 
   let amount = payload["meta"]["amount"];
   if (isNull(amount)) {
-    return callback(new HttpErrors.BadRequest('amount is mandatory.', { expose: false }));
+    //return callback(new HttpErrors.BadRequest('amount is mandatory.', { expose: false }));
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/paymentWithSavedCard`;
