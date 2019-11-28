@@ -68,6 +68,9 @@ function paymentServices(BASE_URL) {
         case "CREATE_TRANSACTION":
           return funCreateTransaction(BASE_URL, payload, callback);
           break;
+        case "UPDATE_TRANSACTION":
+          return funUpdateTransaction(BASE_URL, payload, callback);
+          break;  
         case "SAVE_CARD":
           return funSaveCard(BASE_URL, payload, callback);
           break;
@@ -421,6 +424,21 @@ const funCreateTransaction = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/requestPayment?merchantId=${merchantId}&payerId=${payerId}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funUpdateTransaction = function (BASE_URL, payload, callback) {
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
+  }
+  
+  let url = `${BASE_URL}ezpayPaymentTransactions/updateTransaction?transactionId=${transactionId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
