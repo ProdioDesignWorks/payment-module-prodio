@@ -524,6 +524,7 @@ const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
   let {
     pageNo,
     merchantId,
+    payerId,
     startDate,
     endDate,
     orderId,
@@ -536,7 +537,7 @@ const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
   if(isNull(pageNo)){
        pageNo = 0;
   }
-  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter?merchantId=${merchantId}&pageNo=${pageNo}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}&invoiceId=${invoiceId}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter?pageNo=${pageNo}&merchantId=${merchantId}&payerId=${payerId}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}&invoiceId=${invoiceId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -677,7 +678,6 @@ const funGetProjectTransactionStats = function (BASE_URL, payload, callback) {
 }
 
 const funGetTransactionStats = function (BASE_URL, payload, callback) {
-
   let merchantId = payload["meta"]["merchantId"];
   if (isNull(merchantId)) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
@@ -693,6 +693,13 @@ const funGetTransactionStats = function (BASE_URL, payload, callback) {
 }
 
 const funGetPayerTransactionStats = function (BASE_URL, payload, callback) {
+  let {
+    startDate,
+    endDate,
+    orderId,
+    invoiceId,
+    transactionType
+  } = payload.meta;
 
   let payerId = payload["meta"]["payerId"];
   if (isNull(payerId)) {
@@ -704,7 +711,7 @@ const funGetPayerTransactionStats = function (BASE_URL, payload, callback) {
     merchantId = payload["meta"]["merchantId"];
   }
 
-  let url = `${BASE_URL}ezpayPaymentTransactions/getPayerTransactionStats?payerId=${payerId}&merchantId=${merchantId}`;
+  let url = `${BASE_URL}ezpayPaymentTransactions/getPayerTransactionStats?payerId=${payerId}&merchantId=${merchantId}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}&invoiceId=${invoiceId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
