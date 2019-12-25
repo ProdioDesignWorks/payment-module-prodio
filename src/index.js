@@ -196,6 +196,21 @@ function paymentServices(BASE_URL) {
           break;
         case "SEARCH_TRANSACTION_FILTER":
           return funSearchTransactionsByFilter(BASE_URL, payload, callback);
+        case "ADD_SITE":
+          return funAddBusinessSite(BASE_URL, payload, callback);
+          break;
+        case "EDIT_SITE":
+          return funEditBusinessSite(BASE_URL, payload, callback);
+          break;
+        case "DELETE_SITE":
+          return funDeleteBusinessSite(BASE_URL, payload, callback);
+          break;
+        case "LIST_SITES":
+          return funListBusinessSites(BASE_URL, payload, callback);              
+          break;
+        case "SET_SITE_DEFAULT_CREDENTIALS":
+          return funSetDefaultCredentials(BASE_URL, payload, callback);              
+          break;
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -1197,6 +1212,99 @@ const funGetProjectPayersListing = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getPayersListOfProject?merchantId=${merchantId}&projectId=${projectId}&pageNo=${pageNo}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funAddBusinessSite = function (BASE_URL, payload, callback) {
+
+  let businessId = payload["meta"]["businessId"];
+  if (isNull(businessId)) {
+    return callback(new HttpErrors.BadRequest('businessId is mandatory.', { expose: false }));
+  }
+
+  let locationId = payload["meta"]["locationId"];
+  if (isNull(locationId)) {
+    return callback(new HttpErrors.BadRequest('locationId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpaySites/addSite`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funEditBusinessSite = function (BASE_URL, payload, callback) {
+
+  let siteId = payload["meta"]["siteId"];
+  if (isNull(siteId)) {
+    return callback(new HttpErrors.BadRequest('siteId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpaySites/editSite`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funDeleteBusinessSite = function (BASE_URL, payload, callback) {
+
+  let siteId = payload["meta"]["siteId"];
+  if (isNull(siteId)) {
+    return callback(new HttpErrors.BadRequest('siteId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpaySites/deleteSite`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funListBusinessSites = function (BASE_URL, payload, callback) {
+
+  let businessId = payload["meta"]["businessId"];
+  if (isNull(businessId)) {
+    return callback(new HttpErrors.BadRequest('businessId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpaySites/listSites`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funSetDefaultCredentials = function (BASE_URL, payload, callback) {
+
+  let businessId = payload["meta"]["businessId"];
+  if (isNull(businessId)) {
+    return callback(new HttpErrors.BadRequest('businessId is mandatory.', { expose: false }));
+  }
+  let locationId = payload["meta"]["locationId"];
+  if (isNull(locationId)) {
+    return callback(new HttpErrors.BadRequest('locationId is mandatory.', { expose: false }));
+  }
+  let siteId = payload["meta"]["siteId"];
+  if (isNull(siteId)) {
+    return callback(new HttpErrors.BadRequest('siteId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpaySites/setDefault`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
