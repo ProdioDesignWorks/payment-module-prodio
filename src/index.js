@@ -89,6 +89,9 @@ function paymentServices(BASE_URL) {
         case "PROCESS_PAYMENT":
           return funProcessPayment(BASE_URL, payload, callback);
           break;
+        case "PROCESS_MACHINE_PAYMENT":
+          return funProcessMachinePayment(BASE_URL, payload, callback);
+          break;  
         case "PROCESS_DIRECT_PAYMENT":
           return funProcessDirectPayment(BASE_URL, payload, callback);
           break;  
@@ -214,6 +217,9 @@ function paymentServices(BASE_URL) {
         case "SET_SITE_DEFAULT_CREDENTIALS":
           return funSetDefaultCredentials(BASE_URL, payload, callback);              
           break;
+        case "GET_SITE_DEFAULT_CREDENTIALS":
+          return funGetDefaultCredentials(BASE_URL, payload, callback);              
+          break;  
         default:
           let errorMessage = `Please add BaseUrl.`;
           return errorMessage;
@@ -587,6 +593,27 @@ const funProcessPayment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}&hostBaseURL=${hostBaseURL}`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funProcessMachinePayment = function (BASE_URL, payload, callback) {
+
+  let payerId = payload["meta"]["payerId"];
+  if (isNull(payerId)) {
+    return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
+  }
+
+  let transactionId = payload["meta"]["transactionId"];
+  if (isNull(transactionId)) {
+    return callback(new HttpErrors.BadRequest('transaction Id is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpayPaymentTransactions/paymentWithMachine?payerId=${payerId}&transactionId=${transactionId}`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
@@ -1329,6 +1356,30 @@ const funSetDefaultCredentials = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpaySites/setDefault`;
+  axios.post(url, payload).then(response => {
+    return callback(response);
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
+}
+
+const funGetDefaultCredentials = function (BASE_URL, payload, callback) {
+
+  let businessId = payload["meta"]["businessId"];
+  if (isNull(businessId)) {
+    return callback(new HttpErrors.BadRequest('businessId is mandatory.', { expose: false }));
+  }
+  let locationId = payload["meta"]["locationId"];
+  if (isNull(locationId)) {
+    return callback(new HttpErrors.BadRequest('locationId is mandatory.', { expose: false }));
+  }
+  let siteId = payload["meta"]["siteId"];
+  if (isNull(siteId)) {
+    return callback(new HttpErrors.BadRequest('siteId is mandatory.', { expose: false }));
+  }
+
+  let url = `${BASE_URL}ezpaySites/siteDefaultCredential`;
   axios.post(url, payload).then(response => {
     return callback(response);
   }).catch((error) => {
