@@ -9,6 +9,10 @@ const axios = require('axios');
 const { parse, stringify } = require('flatted/cjs');
 //const BASE_URL = `https://5m4hb8aet1.execute-api.us-west-2.amazonaws.com/prod/`;
 const HttpErrors = require('http-errors');
+var rp = require('request-promise');
+
+let paymentModuleClient = null;
+
 import constant from './config/constant';
 const isNull = function (val) {
   if (typeof val === 'string') { val = val.trim(); }
@@ -28,6 +32,27 @@ const isJson = function (str) {
     return false;
   }
   return false;
+}
+
+const rpRequest = function (requestType,_url,payload) {
+  var options = {
+      method: requestType,
+      uri: _url,
+      json: true // Automatically stringifies the body to JSON
+  };
+
+  if(requestType === "POST"){
+    options["body"] = payload;
+  }
+
+  return new Promise((resolve,reject)=>{
+      rp(options).then(response => {
+        return resolve(response);
+      }).catch((error) => {
+        let json = stringify(error);
+        return reject(json);
+      });
+  }) 
 }
 
 function paymentServices(BASE_URL) {
@@ -245,27 +270,23 @@ const funCreateMerchant = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayMerchants/createMerchant?userId=${userId}`;
-  axios.post(url, payload).then(response => {
-    console.log(response)
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
-  })
-    .catch((error) => {
-      let json = stringify(error);
-      return callback(json);
-    });
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
 }
 
 const funGetAllMerchants = function (BASE_URL, payload, callback) {
 
   let url = `${BASE_URL}ezpayMerchants/getAllActiveMerchants`;
-  axios.get(url).then(response => {
-    console.log(response)
+  rpRequest("GET",url,"").then(response => {
     return callback(response);
-  })
-    .catch((error) => {
-      let json = stringify(error);
-      return callback(json);
-    });
+  }).catch((error) => {
+    let json = stringify(error);
+    return callback(json);
+  });
 }
 
 /**
@@ -280,12 +301,13 @@ const funMerchantActionvationStatus = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayMerchants/getMerchantActivationStatus?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -295,7 +317,7 @@ const funGetMerchantId = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('user Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayMerchants/getMerchantFromUserId?userId=${userId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -309,12 +331,13 @@ const funMerchantProfile = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayMerchants/getMerchantProfile?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -324,7 +347,7 @@ const funUpdateMerchantProfile = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayMerchants/updateMerchantProfile?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -338,7 +361,7 @@ const funDeactivateAccount = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayMerchants/deactivateMerchant?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -355,12 +378,13 @@ const funCreatePayer = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPayees/addPayee?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funEditPayer = function (BASE_URL, payload, callback) {
@@ -369,12 +393,13 @@ const funEditPayer = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayPayees/editPayee?payerId=${payerId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funRemovePayer = function (BASE_URL, payload, callback) {
@@ -383,12 +408,13 @@ const funRemovePayer = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayPayees/removePayees?payerIds=${payerId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -398,7 +424,7 @@ const funImportPayers = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayPayees/importPayees?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -413,7 +439,7 @@ const funGetPayersListing = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('merchant Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayMerchants/getPayeesListing?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -428,7 +454,7 @@ const funGetPayerProfile = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
   let url = `${BASE_URL}ezpayPayees/getPayerProfile?payerId=${payerId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -447,8 +473,11 @@ const funCreateTransaction = function (BASE_URL, payload, callback) {
     return callback(new HttpErrors.BadRequest('payer Id is mandatory.', { expose: false }));
   }
 
+
+
   let url = `${BASE_URL}ezpayPaymentTransactions/requestPayment?merchantId=${merchantId}&payerId=${payerId}`;
-  axios.post(url, payload).then(response => {
+  
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -463,7 +492,7 @@ const funUpdateTransaction = function (BASE_URL, payload, callback) {
   }
   
   let url = `${BASE_URL}ezpayPaymentTransactions/updateTransaction?transactionId=${transactionId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -479,7 +508,7 @@ const funSaveCard = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPayees/addCardForPayee?payerId=${payerId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -500,12 +529,13 @@ const funRemoveCard = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPayees/removeCard?payerId=${payerId}&cardId=${cardId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funSavedCardsListing = function (BASE_URL, payload, callback) {
@@ -516,7 +546,7 @@ const funSavedCardsListing = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPayees/getSavedCards?payerId=${payerId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -536,12 +566,13 @@ const funGetTransactionsListing = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionsListing?merchantId=${merchantId}&pageNo=${pageNo}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
@@ -562,12 +593,13 @@ const funSearchTransactionsByFilter = function (BASE_URL,payload,callback){
        pageNo = 0;
   }
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionByFilter?pageNo=${pageNo}&merchantId=${merchantId}&payerId=${payerId}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}&invoiceId=${invoiceId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funProcessPayment = function (BASE_URL, payload, callback) {
@@ -593,12 +625,13 @@ const funProcessPayment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/processPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}&hostBaseURL=${hostBaseURL}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funProcessMachinePayment = function (BASE_URL, payload, callback) {
@@ -614,7 +647,7 @@ const funProcessMachinePayment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/paymentWithMachine?payerId=${payerId}&transactionId=${transactionId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -645,7 +678,7 @@ const funProcessDirectPayment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/processDirectPayment?payerId=${payerId}&transactionId=${transactionId}&cardId=${cardId}&hostBaseURL=${hostBaseURL}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -659,7 +692,7 @@ const funDirectPayment = function (BASE_URL, payload, callback) {
   payload["BASE_URL"] = BASE_URL;
   console.log("payload==>" + JSON.stringify(payload));
   let url = `${BASE_URL}ezpayPaymentTransactions/directPayment`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -676,7 +709,7 @@ const funGetTransactionDetails = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionDetails?transactionId=${transactionId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -693,12 +726,13 @@ const funGetTransactionInstallments = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionInstallments?transactionId=${transactionId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funGetProjectTransactionStats = function (BASE_URL, payload, callback) {
@@ -714,7 +748,7 @@ const funGetProjectTransactionStats = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getProjectTransactionStats?merchantId=${merchantId}&projectId=${projectId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -729,7 +763,7 @@ const funGetTransactionStats = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getTransactionStats?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -757,12 +791,13 @@ const funGetPayerTransactionStats = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getPayerTransactionStats?payerId=${payerId}&merchantId=${merchantId}&startDate=${startDate}&endDate=${endDate}&orderId=${orderId}&transactionType=${transactionType}&invoiceId=${invoiceId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funGetNonPayersListing = function (BASE_URL, payload, callback) {
@@ -773,7 +808,7 @@ const funGetNonPayersListing = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getNonPayersListing?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -789,12 +824,13 @@ const funGetRevenuePerPayer = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getRevenuePerPayer?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -810,7 +846,8 @@ const funGetPayersTransactions = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getPayersTransactions?payerId=${payerId}&pageNo=${pageNo}`;
-  axios.post(url, payload).then(response => {
+ 
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -821,7 +858,7 @@ const funGetPayersTransactions = function (BASE_URL, payload, callback) {
 const funAttachPayerWithMerchant = function (BASE_URL, payload, callback) {
 
   let url = `${BASE_URL}ezpayMerchants/attachPayerWithMerchants`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -837,12 +874,13 @@ const funGetMerchantsForPayer = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayMerchants/getMerchantListingForPayer?payerId=${payerId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -850,7 +888,7 @@ const funGetMerchantsForPayer = function (BASE_URL, payload, callback) {
 const funMakeRefund = function (BASE_URL, payload, callback) {
 
   let url = `${BASE_URL}ezpayPaymentTransactions/makeRefund`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -871,7 +909,7 @@ const funVerifyCardOE = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/verifyCreditCardOE`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -883,12 +921,13 @@ const funGetOrderDetails = function (BASE_URL, payload, callback) {
 
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getOrderDetails`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -915,12 +954,13 @@ const funPayWithSavedCard = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/paymentWithSavedCard`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -937,7 +977,7 @@ const funAddInstallment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}PaymentInstallments/addNewInstallment`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -953,12 +993,13 @@ const funEditInstallment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}PaymentInstallments/editInstallment`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -970,12 +1011,13 @@ const funEnableInstallments = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}PaymentInstallments/enableInstallments`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -987,12 +1029,13 @@ const funDisableInstallments = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}PaymentInstallments/disbleInstallments`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funEditMultipleInstallment = function (BASE_URL, payload, callback) {
@@ -1003,12 +1046,13 @@ const funEditMultipleInstallment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}PaymentInstallments/editMultipleInstallments`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -1021,12 +1065,13 @@ const funRemoveInstallment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}PaymentInstallments/removeInstallment`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funProcessInstallmentPayment = function (BASE_URL, payload, callback) {
@@ -1052,17 +1097,18 @@ const funProcessInstallmentPayment = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/processInstallmentPayment?payerId=${payerId}&transactionId=${transactionId}&installmentId=${installmentId}&hostBaseURL=${hostBaseURL}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funInstallmentACHPayment = function (BASE_URL, payload, callback) {
   let url = `${BASE_URL}ezpayPaymentTransactions/installmentACHPayment`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -1083,12 +1129,13 @@ const funUpdateTransactionStatus = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/setTransactionStatusManually?transactionId=${transactionId}&transactionStatus=${transactionStatus}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funUpdateTransactionOpenDentalStatus = function (BASE_URL, payload, callback) {
@@ -1104,12 +1151,13 @@ const funUpdateTransactionOpenDentalStatus = function (BASE_URL, payload, callba
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/setOpenDentalStatus?transactionId=${transactionId}&processStatus=${processStatus}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -1126,12 +1174,13 @@ const funGetRevenueGraph = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getRevenueGraphData?merchantId=${merchantId}&year=${year}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
@@ -1149,23 +1198,25 @@ const funGetTransactionGraph = function (BASE_URL, payload, callback) {
   if (!isNull(payload["meta"]["year"])) {
     year = payload["meta"]["year"];
   }
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 
 const funMakeACHPayment = function (BASE_URL, payload, callback) {
   let url = `${BASE_URL}ezpayPaymentTransactions/processACHPayment`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 };
 
 const funCreateOrder = (BASE_URL, payload, callback) => {
@@ -1180,14 +1231,13 @@ const funCreateOrder = (BASE_URL, payload, callback) => {
   let url = `${BASE_URL}${constant.PAYMENT_URL.CREATE_ORDER}?merchantId=${merchantId}`;
   console.log("createOrsder",url);
   console.log("payload",payload);
-  axios.post(url, payload).then(response => {
-    console.log("module response response",response);
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
-  }).catch(error => {
-    console.log("error",error);
+  }).catch((error) => {
     let json = stringify(error);
     return callback(json);
-  })
+  });
+
 }
 
 const funGetOrderProfile = (BASE_URL, payload, callback) => {
@@ -1201,12 +1251,13 @@ const funGetOrderProfile = (BASE_URL, payload, callback) => {
   let url = `${BASE_URL}${constant.PAYMENT_URL.GET_ORDER_PROFILE}`;
   url = url+"?orderId="+orderId;
 
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
-  }).catch(error => {
+  }).catch((error) => {
     let json = stringify(error);
     return callback(json);
-  })
+  });
+
 }
 
 const funCreateTransfer = (BASE_URL,payload,callback)=>{
@@ -1216,7 +1267,7 @@ const funCreateTransfer = (BASE_URL,payload,callback)=>{
   }
 
   let url = `${BASE_URL}${constant.PAYMENT_URL.CREATE_FUND_TRANSFER}?merchantId=${merchantId}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
@@ -1242,12 +1293,13 @@ const funGetProjectPayersListing = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpayPaymentTransactions/getPayersListOfProject?merchantId=${merchantId}&projectId=${projectId}&pageNo=${pageNo}`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funAddBusinessSite = function (BASE_URL, payload, callback) {
@@ -1263,12 +1315,13 @@ const funAddBusinessSite = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpaySites/addSite`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funEditBusinessSite = function (BASE_URL, payload, callback) {
@@ -1279,12 +1332,13 @@ const funEditBusinessSite = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpaySites/editSite`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funDeleteBusinessSite = function (BASE_URL, payload, callback) {
@@ -1295,12 +1349,13 @@ const funDeleteBusinessSite = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpaySites/deleteSite`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funListBusinessSites = function (BASE_URL, payload, callback) {
@@ -1311,12 +1366,13 @@ const funListBusinessSites = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpaySites/listSites`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funListSiteCredentials = function (BASE_URL, payload, callback) {
@@ -1332,12 +1388,13 @@ const funListSiteCredentials = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpaySites/listSiteCredentials`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funSetDefaultCredentials = function (BASE_URL, payload, callback) {
@@ -1356,12 +1413,13 @@ const funSetDefaultCredentials = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpaySites/setDefault`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
     return callback(json);
   });
+
 }
 
 const funGetDefaultCredentials = function (BASE_URL, payload, callback) {
@@ -1380,7 +1438,7 @@ const funGetDefaultCredentials = function (BASE_URL, payload, callback) {
   }
 
   let url = `${BASE_URL}ezpaySites/siteDefaultCredential`;
-  axios.post(url, payload).then(response => {
+  rpRequest("POST",url,payload).then(response => {
     return callback(response);
   }).catch((error) => {
     let json = stringify(error);
